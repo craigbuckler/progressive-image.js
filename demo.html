@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>progressive-image.js demonstration</title>
+<meta name="viewport" content="width=device-width">
+<link rel="stylesheet" href="css/demo.css">
+<link rel="stylesheet" href="css/progressive-image.min.css">
+</head>
+<body>
+
+<main>
+
+  <article>
+
+    <h1>progressive-image.js demonstration</h1>
+
+    <p><code>progressive-image.js</code> implements a lazy-loading progressive image similar to those seen on <a href="https://code.facebook.com/posts/991252547593574/the-technology-behind-preview-photos/">Facebook</a> and <a href="https://jmperezperez.com/medium-image-progressive-loading-placeholder/">Medium</a>. A very small, blurred image is replaced with the full-resolution equivalent when the element is scrolled into view.</p>
+
+    <a href="http://lorempixel.com/800/200/nature/5/" data-srcset="http://lorempixel.com/800/200/nature/5/ 800w, http://lorempixel.com/1600/400/nature/5/ 1600w" class="primary progressive replace">
+      <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD//gA7Q1JFQVRPUjogZ2QtanBlZyB2MS4wICh1c2luZyBJSkcgSlBFRyB2NjIpLCBxdWFsaXR5ID0gNzAK/9sAQwAKBwcIBwYKCAgICwoKCw4YEA4NDQ4dFRYRGCMfJSQiHyIhJis3LyYpNCkhIjBBMTQ5Oz4+PiUuRElDPEg3PT47/9sAQwEKCwsODQ4cEBAcOygiKDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7/8AAEQgABQAUAwEiAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29/j5+v/aAAwDAQACEQMRAD8A5yC3e2S3gM7OEQHdgA57VTuLAPqUoaUk7yM7R2BPSiivS5VN8stjmk2ldGVM3lyshG7bxk0UUV4skk2jdN2P/9k=" class="preview" alt="palm trees" />
+    </a>
+
+    <p>Benefits:</p>
+
+    <a href="http://lorempixel.com/400/300/nature/2/" class="boxout2 progressive replace">
+      <img src="http://lorempixel.com/20/15/nature/2/" class="preview" alt="sunset" />
+    </a>
+
+    <ul>
+      <li>fast loading, high performance, images loaded on view</li>
+      <li>supports any image type (JPEG photographs are most appropriate)</li>
+      <li>supports responsive images (<code>srcset</code> and <code>sizes</code> attributes)</li>
+      <li>small: 1,007 bytes of JavaScript, 463 bytes of CSS (minified)</li>
+      <li>any CSS reveal effect can be applied</li>
+      <li>no external dependencies - works with any framework</li>
+      <li>works in all modern browsers (IE10+)</li>
+      <li>progressively-enhanced to work in older browsers</li>
+      <li>easy to use</li>
+    </ul>
+
+    <a href="http://lorempixel.com/400/300/nature/3/" class="boxout1 progressive replace">
+      <img src="http://lorempixel.com/20/15/nature/3/" class="preview" alt="tide" />
+    </a>
+
+    <p>The preview image can be very small - perhaps 20px in width and saved with high JPEG compression. This typically results in an image less than 500 bytes in size. It be added to the page directly or inlined as a data URI using base-64 encoding.</p>
+
+    <p>The large image can be any size but should match the preview image's aspect ratio. For example, 20x15 can be scaled to 200x150, 400x300 or 1600x1200.</p>
+
+    <h2>Basic example</h2>
+
+    <p>The page must load the CSS and JavaScript. It can be placed anywhere on the page but, typically, the CSS is loaded in the <code>&lt;head&gt;</code> and the JS is loaded just before the closing <code>&lt;/body&gt;</code> tag:</p>
+
+    <pre><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;css/progressive-image.min.css&quot;&gt;
+&lt;script src=&quot;js/progressive-image.min.js&quot;&gt;&lt;/script&gt;</code></pre>
+
+    <p>The simplest progressive image is a link to the full-size graphic around the preview. Note the <code>progressive</code> and <code>replace</code> classes on the link and the <code>preview</code> class on the image.</p>
+
+    <pre><code>&lt;a href=&quot;full.jpg&quot; class=&quot;progressive replace&quot;&gt;
+  &lt;img src=&quot;tiny.jpg&quot; class=&quot;preview&quot; alt=&quot;image&quot; /&gt;
+&lt;/a&gt;</code></pre>
+
+    <p>If image loading or JavaScript fails, a blurred version of the preview image can be clicked to view the full image:</p>
+
+    <a href="http://lorempixel.com/600/300/people/7/" class="full progressive" style="cursor:pointer;">
+      <img src="http://lorempixel.com/20/10/people/7/" class="preview" alt="eyes" />
+    </a>
+
+    <p>When JavaScript runs successfully, the large image is revealed when the preview is scrolled into view. CSS3 effects are used to fade and zoom the image:</p>
+
+    <a href="http://lorempixel.com/600/300/people/7/" class="full progressive replace">
+      <img src="http://lorempixel.com/20/10/people/7/" class="preview" alt="eyes" />
+    </a>
+
+    <p>After replacement, the link click is disabled and resulting HTML will be:</p>
+
+    <pre><code>&lt;a href=&quot;full.jpg&quot; class=&quot;progressive&quot;&gt;
+  &lt;img src=&quot;full.jpg&quot; alt=&quot;image&quot; /&gt;
+&lt;/a&gt;</code></pre>
+
+    <h2>Responsive image example</h2>
+
+    <p><a href="https://www.sitepoint.com/how-to-build-responsive-images-with-srcset/">Responsive images</a> of differing sizes and resolutions can be defined in the link using the <code>data-srcset</code> and <code>data-sizes</code> attributes which map to the standard <code>srcset</code> and <code>sizes</code> attributes, e.g.</p>
+
+    <pre><code>&lt;a href=&quot;small.jpg&quot;
+  data-srcset=&quot;small.jpg 800w, large.jpg 1200w&quot;
+  data-sizes=&quot;100vw&quot;
+  class=&quot;progressive replace&quot;&gt;
+  &lt;img src=&quot;preview.jpg&quot; class=&quot;preview&quot; alt=&quot;image&quot; /&gt;
+&lt;/a&gt;</code></pre>
+
+    <p><em>(carriage returns added to aid legibility)</em></p>
+
+    <p>On replacement, the image code is transformed to:</p>
+
+    <pre><code>&lt;img src=&quot;small.jpg&quot;
+srcset=&quot;small.jpg 800w, large.jpg 1200w&quot;
+sizes=&quot;100vw&quot;
+alt=&quot;image&quot; /&gt;</code></pre>
+
+    <p>Modern browsers will load large.jpg on screens of 800px width or greater.</p>
+
+    <h2>Usage notes</h2>
+
+    <ol>
+      <li>The preview and full-size images must have identical aspect ratios, e.g. 20x10 and 1200x600.</li>
+
+      <li>Only vertical scrolling is checked. All images in the horizontal plane will be loaded.</li>
+
+      <li>Progressive images dynamically added to the page using JavaScript will only be replaced when a scroll or resize event occurs.</li>
+
+      <li>You may be able to improve actual or perceived performance using <a href="https://css-tricks.com/data-uris/">data URIs to inline images</a> or <a href="http://daverupert.com/2015/12/intrinsic-placeholders-with-picture/">intrinsic placeholders</a>.</li>
+
+      <li>Firefox can struggle when replacing large images and show a noticeable flicker.</li>
+    </ol>
+
+    <a href="http://lorempixel.com/500/100/city/5/" data-srcset="http://lorempixel.com/500/100/city/5/ 500w, http://lorempixel.com/1000/200/city/5/ 1000w, http://lorempixel.com/1500/300/city/5/ 1500w" class="primary progressive replace">
+      <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD//gA+Q1JFQVRPUjogZ2QtanBlZyB2MS4wICh1c2luZyBJSkcgSlBFRyB2NjIpLCBkZWZhdWx0IHF1YWxpdHkK/9sAQwAIBgYHBgUIBwcHCQkICgwUDQwLCwwZEhMPFB0aHx4dGhwcICQuJyAiLCMcHCg3KSwwMTQ0NB8nOT04MjwuMzQy/9sAQwEJCQkMCwwYDQ0YMiEcITIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIy/8AAEQgABAAUAwEiAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29/j5+v/aAAwDAQACEQMRAD8Amh8Sag2pQxl1KurZGD2GR396r32qXy+aFu5hhBjDnjJaiircnd6maSscfd+I9XtZ/KjvpNu1TlsMScepoooppslrU//Z" class="preview" alt="city" />
+    </a>
+
+  </article>
+
+</main>
+
+<script src="js/progressive-image.min.js"></script>
+</body>
+</html>

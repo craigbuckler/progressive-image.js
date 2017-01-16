@@ -1,0 +1,85 @@
+/* main styles */
+
+*, *:before, *:after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-size: 100%;
+  color: #444;
+  background-color: #fff;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+article {
+  max-width: 40em;
+  padding: 0 4em;
+  margin: 0 auto;
+}
+
+h1, h2 {
+  font-weight: normal;
+  margin-top: 1em;
+}
+
+p, a {
+  margin-top: 1em;
+}
+
+h2 + p {
+  margin-top: 0;
+}
+
+ul, ol {
+  margin: 1em 0 0 2em;
+}
+
+li {
+  margin-top: 0.5em;
+}
+
+pre {
+  white-space: pre;
+  padding: 2px 6px;
+  margin-top: 1em;
+  background-color: #ddd;
+  border-radius: 3px;
+  overflow: auto;
+}
+
+code {
+  font-size: 1.1em;
+}
+
+img {
+  max-width: 100%;
+}
+
+a.primary {
+  width: 100vw;
+  left: 50%;
+  margin-left: -50vw;
+}
+
+a.full {
+  clear: both;
+  width: 100%;
+  box-shadow: 0 3px 4px #000;
+}
+
+a.boxout1, a.boxout2 {
+  clear: both;
+  float: left;
+  width: 60%;
+  margin: 1em 1em 0 -4em;
+  box-shadow: 0 3px 4px #000;
+}
+
+a.boxout2 {
+  float: right;
+  margin: 1em -4em 0 1em;
+}
