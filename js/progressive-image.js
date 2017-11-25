@@ -1,20 +1,34 @@
-// progressive-image.js
+// progressive-image.js, v1.1
+// by Craig Buckler, @craigbuckler
 if (window.addEventListener && window.requestAnimationFrame && document.getElementsByClassName) window.addEventListener('load', function() {
 
   // start
-  var pItem = document.getElementsByClassName('progressive replace'), timer;
+  var pItem = document.getElementsByClassName('progressive replace'), pCount, timer;
 
+  // scroll and resize events
   window.addEventListener('scroll', scroller, false);
   window.addEventListener('resize', scroller, false);
+
+  // DOM mutation observer
+  if (MutationObserver) {
+
+    var observer = new MutationObserver(function() {
+      if (pItem.length !== pCount) inView();
+    });
+    observer.observe(document.body, { subtree: true, childList: true, attributes: true, characterData: true });
+
+  }
+
+  // initial check
   inView();
 
 
   // throttled scroll/resize
-  function scroller(e) {
+  function scroller() {
 
     timer = timer || setTimeout(function() {
       timer = null;
-      requestAnimationFrame(inView);
+      inView();
     }, 300);
 
   }
@@ -23,20 +37,26 @@ if (window.addEventListener && window.requestAnimationFrame && document.getEleme
   // image in view?
   function inView() {
 
-    var wT = window.pageYOffset, wB = wT + window.innerHeight, cRect, pT, pB, p = 0;
-    while (p < pItem.length) {
+    if (pItem.length) requestAnimationFrame(function() {
 
-      cRect = pItem[p].getBoundingClientRect();
-      pT = wT + cRect.top;
-      pB = pT + cRect.height;
+      var wT = window.pageYOffset, wB = wT + window.innerHeight, cRect, pT, pB, p = 0;
+      while (p < pItem.length) {
 
-      if (wT < pB && wB > pT) {
-        loadFullImage(pItem[p]);
-        pItem[p].classList.remove('replace');
+        cRect = pItem[p].getBoundingClientRect();
+        pT = wT + cRect.top;
+        pB = pT + cRect.height;
+
+        if (wT < pB && wB > pT) {
+          loadFullImage(pItem[p]);
+          pItem[p].classList.remove('replace');
+        }
+        else p++;
+
       }
-      else p++;
 
-    }
+      pCount = pItem.length;
+
+    });
 
   }
 
@@ -44,7 +64,8 @@ if (window.addEventListener && window.requestAnimationFrame && document.getEleme
   // replace with full image
   function loadFullImage(item) {
 
-    if (!item || !item.href) return;
+    var href = item && (item.getAttribute('data-href') || item.href);
+    if (!href) return;
 
     // load image
     var img = new Image();
@@ -52,7 +73,7 @@ if (window.addEventListener && window.requestAnimationFrame && document.getEleme
       img.srcset = item.dataset.srcset || '';
       img.sizes = item.dataset.sizes || '';
     }
-    img.src = item.href;
+    img.src = href;
     img.className = 'reveal';
     if (img.complete) addImg();
     else img.onload = addImg;
@@ -60,19 +81,26 @@ if (window.addEventListener && window.requestAnimationFrame && document.getEleme
     // replace image
     function addImg() {
 
-      // disable click
-      item.addEventListener('click', function(e) { e.preventDefault(); }, false);
+      requestAnimationFrame(function() {
 
-      // add full image
-      item.appendChild(img).addEventListener('animationend', function(e) {
-
-        // remove preview image
-        var pImg = item.querySelector && item.querySelector('img.preview');
-        if (pImg) {
-          e.target.alt = pImg.alt || '';
-          item.removeChild(pImg);
-          e.target.classList.remove('reveal');
+        // disable click
+        if (href === item.href) {
+          item.style.cursor = 'default';
+          item.addEventListener('click', function(e) { e.preventDefault(); }, false);
         }
+
+        // add full image
+        item.appendChild(img).addEventListener('animationend', function(e) {
+
+          // remove preview image
+          var pImg = item.querySelector && item.querySelector('img.preview');
+          if (pImg) {
+            e.target.alt = pImg.alt || '';
+            item.removeChild(pImg);
+            e.target.classList.remove('reveal');
+          }
+
+        });
 
       });
 

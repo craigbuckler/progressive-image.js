@@ -2,14 +2,17 @@
 
 A lazy-loading progressive image system similar to those seen on  [Facebook](https://code.facebook.com/posts/991252547593574/the-technology-behind-preview-photos/) and [Medium](https://jmperezperez.com/medium-image-progressive-loading-placeholder/). A very small, blurred image is replaced with the full-resolution equivalent when the element is scrolled into view.
 
-**[View demonstration on codepen.io...](http://codepen.io/craigbuckler/pen/dNpaWp)**
+**[View demonstration on codepen.io...](https://codepen.io/craigbuckler/pen/yPqLXW)**
+
+Please use the code as you wish - [tweet me @craigbuckler](https://twitter.com/craigbuckler) if you find it useful.
 
 Benefits:
 
+* saves unnecessary bandwidth
 * fast loading, high performance, images loaded on view
 * supports any image type (JPEG photographs are most appropriate)
 * supports responsive images (`srcset` and `sizes` attributes)
-* small: 1,007 bytes of JavaScript, 463 bytes of CSS (minified)
+* small: 1,312 bytes of JavaScript, 445 bytes of CSS (minified)
 * any CSS reveal effect can be applied
 * no external dependencies - works with any framework
 * works in all modern browsers (IE10+)
@@ -18,7 +21,7 @@ Benefits:
 
 
 ## Usage instructions
-Include the minified CSS and JavaScript on your page:
+Include the minified CSS and JavaScript in your page:
 
 ```html
 <link rel="stylesheet" href="css/progressive-image.min.css">
@@ -36,7 +39,7 @@ Basic example:
 Where:
 
 * `full.jpg` is the large image.
-* `tiny.jpg` is a very small preview image - typically 20px in width saved with high JPEG compression. It be added to the page directly or inlined as a data URI as necessary.
+* `tiny.jpg` is a very small preview image - typically 20px in width saved with high JPEG compression. It be added to the page directly or inlined as a data URI.
 
 *Both images must have the same aspect ratio.*
 
@@ -69,8 +72,23 @@ Modern browsers will load `large.jpg` on screens of 800px width or greater.
 
 ## Usage notes
 
-1. The preview and full-size images must have identical aspect ratios, e.g. 20x10 and 1200x600.
-2. Only vertical scrolling is checked. All images in the horizontal plane will be loaded.
-3. Progressive images dynamically added to the page using JavaScript will only be replaced when a scroll or resize event occurs.
-4. You may be able to improve actual or perceived performance using data URIs to inline images or intrinsic placeholders.
-5. Firefox can struggle when replacing large images and show a noticeable flicker.
+1. Works in all browsers from IE10 and above. IE10/11 will not blur the preview image. Older browsers fallback to click-to-view.
+2. The preview and full-size images must have identical aspect ratios, e.g. 20x10 and 1200x600.
+3. Only vertical scrolling is checked. All images in the horizontal plane will be loaded.
+4. Progressive images dynamically added to the page using JavaScript will be replaced if the browser supports `MutationObserver`.
+5. You may improve actual or perceived performance using data URIs to inline images or intrinsic placeholders.
+
+Further examples and options can be found on the [example page](https://cdn.rawgit.com/craigbuckler/progressive-image.js/60f8ccc9/demo.html).
+
+## Version history
+
+**v1.1, 25 November 2017**
+
+* permits any container element
+* link to other URLs can be retained
+* mutation observer event detects elements added via JavaScript
+* minor performance tweaks
+
+**v1.0, 16 January 2017**
+
+* Initial commit
