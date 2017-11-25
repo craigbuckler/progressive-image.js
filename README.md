@@ -78,7 +78,7 @@ Modern browsers will load `large.jpg` on screens of 800px width or greater.
 4. Progressive images dynamically added to the page using JavaScript will be replaced if the browser supports `MutationObserver`.
 5. You may improve actual or perceived performance using data URIs to inline images or intrinsic placeholders.
 
-Further examples and options can be found on the [example page](https://cdn.rawgit.com/craigbuckler/progressive-image.js/60f8ccc9/demo.html).
+Further examples and options can be found on the [example page](https://cdn.rawgit.com/craigbuckler/progressive-image.js/7f022aaf/demo.html).
 
 ## Version history
 
