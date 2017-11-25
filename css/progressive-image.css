@@ -1,16 +1,12 @@
 /* progressive image CSS */
-a.progressive {
+.progressive {
   position: relative;
   display: block;
   overflow: hidden;
   outline: none;
 }
 
-a.progressive:not(.replace) {
-  cursor: default;
-}
-
-a.progressive img {
+.progressive img {
   display: block;
   width: 100%;
   max-width: none;
@@ -18,20 +14,20 @@ a.progressive img {
   border: 0 none;
 }
 
-a.progressive img.preview {
+.progressive img.preview {
   filter: blur(2vw);
   transform: scale(1.05);
 }
 
-a.progressive img.reveal {
+.progressive img.reveal {
   position: absolute;
   left: 0;
   top: 0;
   will-change: transform, opacity;
-  animation: reveal 1s ease-out;
+  animation: progressiveReveal 1s ease-out;
 }
 
-@keyframes reveal {
+@keyframes progressiveReveal {
 	0% { transform: scale(1.05); opacity: 0; }
 	100% { transform: scale(1); opacity: 1; }
 }

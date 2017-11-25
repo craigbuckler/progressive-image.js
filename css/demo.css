@@ -52,34 +52,38 @@ pre {
 }
 
 code {
-  font-size: 1.1em;
+  font-family: monospace;
+  font-size: 1em;
 }
 
 img {
   max-width: 100%;
 }
 
-a.primary {
+.primary {
   width: 100vw;
   left: 50%;
   margin-left: -50vw;
 }
 
-a.full {
+.full, .boxout1, .boxout2 {
   clear: both;
   width: 100%;
   box-shadow: 0 3px 4px #000;
 }
 
-a.boxout1, a.boxout2 {
-  clear: both;
-  float: left;
-  width: 60%;
-  margin: 1em 1em 0 -4em;
-  box-shadow: 0 3px 4px #000;
-}
+@media (min-width: 40em) {
 
-a.boxout2 {
-  float: right;
-  margin: 1em -4em 0 1em;
+  .boxout1, .boxout2 {
+    clear: both;
+    float: left;
+    width: 22em;
+    margin: 1em 1em 1em -4em;
+  }
+
+  .boxout2 {
+    float: right;
+    margin: 1em -4em 1em 1em;
+  }
+
 }
