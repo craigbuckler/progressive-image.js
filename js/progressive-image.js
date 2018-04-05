@@ -89,11 +89,17 @@ if (window.addEventListener && window.requestAnimationFrame && document.getEleme
           item.addEventListener('click', function(e) { e.preventDefault(); }, false);
         }
 
-        // add full image
-        item.appendChild(img).addEventListener('animationend', function(e) {
+        // Preview Image
+        var pImg = item.querySelector && item.querySelector('img.preview');
 
-          // remove preview image
-          var pImg = item.querySelector && item.querySelector('img.preview');
+        // add full image
+        (
+            pImg
+                ? pImg.parentNode.insertBefore(img, pImg.nextSibling)
+                : item.appendChild(img)
+        ).addEventListener('animationend', function(e) {
+
+          // remove preview image          
           if (pImg) {
             e.target.alt = pImg.alt || '';
             item.removeChild(pImg);
