@@ -82,6 +82,11 @@ Further examples and options can be found on the [example page](https://cdn.rawg
 
 ## Version history
 
+**v1.2, 9 April 2018**
+
+* full image replaces preview in-place (PR from ftaiolivista)
+* minor refactoring and simplification
+
 **v1.1, 25 November 2017**
 
 * permits any container element
