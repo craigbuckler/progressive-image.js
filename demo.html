@@ -34,6 +34,7 @@
       <li>fast loading, high performance, images loaded on view</li>
       <li>supports any image type (JPEG photographs are most appropriate)</li>
       <li>supports responsive images (<code>srcset</code> and <code>sizes</code> attributes)</li>
+      <li>supports CSS background images</li>
       <li>small: 1,300 bytes of JavaScript, 445 bytes of CSS (minified)</li>
       <li>any CSS reveal effect can be applied</li>
       <li>no external dependencies - works with any framework</li>
@@ -86,8 +87,9 @@
     <p>If you require a responsive image to remain a real link, use the <code>href</code> for the address then add a <code>data-href</code> attribute with the large image URL:</p>
 
     <pre><code>&lt;a href=&quot;http://site.com/&quot;
-data-href=&quot;full.jpg&quot; class=&quot;progressive replace&quot;&gt;
-  &lt;img src=&quot;tiny.jpg&quot; class=&quot;preview&quot; alt=&quot;image&quot; /&gt;
+   data-href=&quot;full.jpg&quot;
+   class=&quot;progressive replace&quot;&gt;
+     &lt;img src=&quot;tiny.jpg&quot; class=&quot;preview&quot; alt=&quot;image&quot; /&gt;
 &lt;/a&gt;</code></pre>
 
     <h2>Alternative container elements</h2>
@@ -103,10 +105,10 @@ data-href=&quot;full.jpg&quot; class=&quot;progressive replace&quot;&gt;
     <p><a href="https://www.sitepoint.com/how-to-build-responsive-images-with-srcset/">Responsive images</a> of differing sizes and resolutions can be defined in the container link/element using the <code>data-srcset</code> and <code>data-sizes</code> attributes which map to the standard <code>srcset</code> and <code>sizes</code> attributes, e.g.</p>
 
     <pre><code>&lt;a href=&quot;small.jpg&quot;
-  data-srcset=&quot;small.jpg 800w, large.jpg 1200w&quot;
-  data-sizes=&quot;100vw&quot;
-  class=&quot;progressive replace&quot;&gt;
-  &lt;img src=&quot;preview.jpg&quot; class=&quot;preview&quot; alt=&quot;image&quot; /&gt;
+   data-srcset=&quot;small.jpg 800w, large.jpg 1200w&quot;
+   data-sizes=&quot;100vw&quot;
+   class=&quot;progressive replace&quot;&gt;
+     &lt;img src=&quot;preview.jpg&quot; class=&quot;preview&quot; alt=&quot;image&quot; /&gt;
 &lt;/a&gt;</code></pre>
 
     <p><em>(carriage returns added to aid legibility)</em></p>
@@ -114,11 +116,38 @@ data-href=&quot;full.jpg&quot; class=&quot;progressive replace&quot;&gt;
     <p>On replacement, the image code is transformed to:</p>
 
     <pre><code>&lt;img src=&quot;small.jpg&quot;
-srcset=&quot;small.jpg 800w, large.jpg 1200w&quot;
-sizes=&quot;100vw&quot;
-alt=&quot;image&quot; /&gt;</code></pre>
+     srcset=&quot;small.jpg 800w, large.jpg 1200w&quot;
+     sizes=&quot;100vw&quot;
+     alt=&quot;image&quot; /&gt;</code></pre>
 
     <p>Modern browsers will load large.jpg on screens of 800px width or greater.</p>
+
+    <h2>CSS background images</h2>
+
+    <p><code>progressive-image.js</code> can replace CSS backgrounds.</p>
+
+    <div class="full bgimg progressive replace">CSS background image</div>
+
+    <p>Example HTML:</p>
+
+    <pre><code>&lt;div class=&quot;bgimg progressive replace&quot;&gt;content&lt;/div&gt;</code></pre>
+
+    <p>The <code>bgimg</code> class can be any CSS selector. Set the full-size image in your CSS as normal, e.g.</p>
+
+    <pre><code>.bgimg {
+  background: url(large.jpg) 50% 50% no-repeat;
+  background-size: cover;
+}</code></pre>
+
+    <p>then add a <code>.replace</code> definition with the smaller preview image:</p>
+
+    <pre><code>.bgimg.replace {
+  background-img: url(tiny.jpg);
+}</code></pre>
+
+    <p><code>tiny.jpg</code> is replaced with <code>large.jpg</code> as soon as the element appears in the viewport. Media queries can be used to load images of appropriate sizes.</p>
+
+    <p>No CSS3 animation effects can be applied to background images. If effects are required, use a real image, set <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit">CSS <code>object-fit: cover</code></a>, and ensure it falls below other content in the container.</p>
 
     <h2>Usage notes</h2>
 
@@ -129,7 +158,7 @@ alt=&quot;image&quot; /&gt;</code></pre>
 
       <li>Only vertical scrolling is checked. All images in the horizontal plane will be loaded.</li>
 
-      <li>Progressive images dynamically added to the page using JavaScript will be replaced if the browser supports <code>MutationObserver</code>.</li>
+      <li>Progressive images dynamically added to the page using JavaScript will be replaced if the browser supports <code>MutationObserver</code> or when the viewport is scrolled/resized.</li>
 
       <li>You may improve actual or perceived performance using <a href="https://css-tricks.com/data-uris/">data URIs to inline images</a> or <a href="http://daverupert.com/2015/12/intrinsic-placeholders-with-picture/">intrinsic placeholders</a>.</li>
     </ol>
