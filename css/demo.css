@@ -60,6 +60,21 @@ img {
   max-width: 100%;
 }
 
+.bgimg {
+  background: url(https://ucarecdn.com/718f79c5-2868-41c8-b56e-c87237674adb/-/resize/500x/man.jpg) 50% 50% no-repeat;
+  background-size: cover;
+  height: 300px;
+  margin-top: 0.5em;
+  font-size: 2em;
+  text-align: center;
+  color: #fff;
+  text-shadow: 0 0 2px #000;
+}
+
+.bgimg.replace {
+  background-image: url(https://ucarecdn.com/718f79c5-2868-41c8-b56e-c87237674adb/-/resize/32x/man.jpg);
+}
+
 .primary {
   width: 100vw;
   left: 50%;
