@@ -1,4 +1,4 @@
-// progressive-image.js, v1.2
+// progressive-image.js, v1.2.1
 // by Craig Buckler, @craigbuckler
 if (window.addEventListener && window.requestAnimationFrame && document.getElementsByClassName) window.addEventListener('load', function() {
 
@@ -38,8 +38,8 @@ if (window.addEventListener && window.requestAnimationFrame && document.getEleme
   function inView() {
 
     if (pItem.length) requestAnimationFrame(function() {
-      
-      var wH =  window.innerHeight, cRect, cT, cH, p = 0;
+
+      var wH = window.innerHeight, cRect, cT, cH, p = 0;
       while (p < pItem.length) {
 
         cRect = pItem[p].getBoundingClientRect();
