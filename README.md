@@ -74,7 +74,7 @@ On replacement, the image code becomes:
 
 Modern browsers will load `large.jpg` on screens of 800px width or greater.
 
-Further examples, options and usage notes can be found on the [demo.html example page](https://cdn.rawgit.com/craigbuckler/progressive-image.js/7f022aaf/demo.html).
+Further examples, options and usage notes can be found on the [demo.html example page](https://cdn.rawgit.com/craigbuckler/progressive-image.js/5d62a0d0/demo.html).
 
 ## Version history
 
