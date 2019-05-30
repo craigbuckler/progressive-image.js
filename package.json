@@ -1,0 +1,37 @@
+{
+  "name": "progressive-image.js",
+  "version": "1.3.0",
+  "description": "progressive lazy-loading image system",
+  "main": "dist/progressive-image.js",
+  "files": [
+    "dist/progressive-image.css"
+  ],
+  "scripts": {
+    "build": "npm i && gulp",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Craig Buckler",
+  "homepage": "https://github.com/craigbuckler/progressive-image.js#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/craigbuckler/progressive-image.js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/craigbuckler/progressive-image.js/issues"
+  },
+  "keywords": [
+    "JavaScript",
+    "progressive",
+    "image",
+    "lazy",
+    "load"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "autoprefixer": "^9.5.1",
+    "cssnano": "^4.1.10",
+    "gulp": "^4.0.2",
+    "gulp-postcss": "^8.0.0",
+    "gulp-terser": "^1.2.0"
+  }
+}

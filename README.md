@@ -1,19 +1,17 @@
 # progressive-image.js
 
-A lazy-loading progressive image system similar to those seen on  [Facebook](https://code.facebook.com/posts/991252547593574/the-technology-behind-preview-photos/) and [Medium](https://jmperezperez.com/medium-image-progressive-loading-placeholder/). A very small, blurred image is replaced with the full-resolution equivalent when the element is scrolled into view.
+[**demonstration**](https://codepen.io/craigbuckler/pen/yPqLXW) | [**GitHub**](https://github.com/craigbuckler/progressive-image.js) | [**npm**](https://www.npmjs.com/package/progressive-image.js) | [**donate**](https://gum.co/vIjey) | [@craigbuckler](https://twitter.com/craigbuckler) | [craigbuckler.com](https://craigbuckler.com/)
 
-**[View demonstration and further examples on codepen.io...](https://codepen.io/craigbuckler/pen/yPqLXW)**
+A lazy-loading progressive image system similar to those seen on [Facebook](https://code.facebook.com/posts/991252547593574/the-technology-behind-preview-photos/) and [Medium](https://jmperezperez.com/medium-image-progressive-loading-placeholder/). A very small, blurred image is replaced with the full-resolution equivalent when the element is scrolled into view.
 
-Please use the code as you wish - [tweet me @craigbuckler](https://twitter.com/craigbuckler) if you find it useful.
-
-Benefits:
+Please use the code as you wish. [Tweet me @craigbuckler](https://twitter.com/craigbuckler) if you find it useful and [donate toward development](https://gum.co/vIjey) if you use it commercially.
 
 * saves unnecessary bandwidth
 * fast loading, high performance, images loaded on view
 * supports any image type (JPEG photographs are most appropriate)
 * supports responsive images (`srcset` and `sizes` attributes)
 * supports CSS background images
-* small: 1,300 bytes of JavaScript, 445 bytes of CSS (minified)
+* small: 1,300 bytes of JavaScript, 440 bytes of CSS (minified)
 * any CSS reveal effect can be applied
 * no external dependencies - works with any framework
 * works in all modern browsers (IE10+)
@@ -22,12 +20,15 @@ Benefits:
 
 
 ## Usage instructions
+
 Include the minified CSS and JavaScript anywhere in your page:
 
 ```html
-<link rel="stylesheet" href="css/progressive-image.min.css">
-<script src="js/progressive-image.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/progressive-image.js@1.3.0/dist/progressive-image.css">
+<script src="https://cdn.jsdelivr.net/npm/progressive-image.js@1.3.0/dist/progressive-image.js"></script>
 ```
+
+CDN URLs are shown above but you can also `npm i progressive-image.js` to install via npm and use a bundler.
 
 Basic example:
 
@@ -74,9 +75,14 @@ On replacement, the image code becomes:
 
 Modern browsers will load `large.jpg` on screens of 800px width or greater.
 
-Further examples, options and usage notes can be found on the [demo.html example page](https://cdn.rawgit.com/craigbuckler/progressive-image.js/5d62a0d0/demo.html).
+Further examples, options and usage notes can be found on the [demonstration page](https://codepen.io/craigbuckler/pen/yPqLXW).
 
 ## Version history
+
+**v1.3, 30 May 2019**
+
+* Gulp.js minification
+* published on npm, CDN information
 
 **v1.2, 13 April 2018**
 
