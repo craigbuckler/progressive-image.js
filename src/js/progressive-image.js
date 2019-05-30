@@ -1,4 +1,4 @@
-// progressive-image.js, v1.2.1
+// progressive-image.js
 // by Craig Buckler, @craigbuckler
 if (window.addEventListener && window.requestAnimationFrame && document.getElementsByClassName) window.addEventListener('load', function() {
 
