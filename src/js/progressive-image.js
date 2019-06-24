@@ -62,7 +62,7 @@ if (window.addEventListener && window.requestAnimationFrame && document.getEleme
 
 
   // replace with full image
-  function loadFullImage(item) {
+  function loadFullImage(item, retry) {
 
     var href = item && (item.getAttribute('data-href') || item.href);
     if (!href) return;
@@ -73,10 +73,13 @@ if (window.addEventListener && window.requestAnimationFrame && document.getEleme
       img.srcset = item.dataset.srcset || '';
       img.sizes = item.dataset.sizes || '';
     }
-    img.src = href;
+    img.onload = addImg;
+    retry = 1 + (retry || 0);
+    if (retry < 3) img.onerror = function() {
+      setTimeout(function() { loadFullImage(item, retry); }, retry * 3000);
+    };
     img.className = 'reveal';
-    if (img.complete) addImg();
-    else img.onload = addImg;
+    img.src = href;
 
     // replace image
     function addImg() {

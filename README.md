@@ -11,9 +11,10 @@ Please use the code as you wish. [Tweet me @craigbuckler](https://twitter.com/cr
 * supports any image type (JPEG photographs are most appropriate)
 * supports responsive images (`srcset` and `sizes` attributes)
 * supports CSS background images
-* small: 1,300 bytes of JavaScript, 440 bytes of CSS (minified)
+* small: 1,340 bytes of JavaScript, 440 bytes of CSS (minified)
 * any CSS reveal effect can be applied
 * no external dependencies - works with any framework
+* makes up to three attempts if images fail to download
 * works in all modern browsers (IE10+)
 * progressively-enhanced to work in older browsers
 * easy to use
@@ -24,8 +25,8 @@ Please use the code as you wish. [Tweet me @craigbuckler](https://twitter.com/cr
 Include the minified CSS and JavaScript anywhere in your page:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/progressive-image.js@1.3.0/dist/progressive-image.css">
-<script src="https://cdn.jsdelivr.net/npm/progressive-image.js@1.3.0/dist/progressive-image.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/progressive-image.js/dist/progressive-image.css">
+<script src="https://cdn.jsdelivr.net/npm/progressive-image.js/dist/progressive-image.js"></script>
 ```
 
 CDN URLs are shown above but you can also `npm i progressive-image.js` to install via npm and use a bundler.
@@ -79,27 +80,33 @@ Further examples, options and usage notes can be found on the [demonstration pag
 
 ## Version history
 
-**v1.3, 30 May 2019**
+### v1.4.0, 24 June 2019
+
+* retries download after 3s and 6s (suggestion from [cheuksing](https://github.com/cheuksing))
+* continues to show preview if full image download fails
+* autoprefixer update
+
+### v1.3.0, 30 May 2019
 
 * Gulp.js minification
 * published on npm, CDN information
 
-**v1.2, 13 April 2018**
+### v1.2.0, 13 April 2018
 
 * added CSS background image support information
 
-**v1.2, 9 April 2018**
+### v1.2.0, 9 April 2018
 
-* full image replaces preview in-place (PR from ftaiolivista)
+* full image replaces preview in-place (PR from [ftaiolivista](https://github.com/ftaiolivista))
 * minor refactoring and simplification
 
-**v1.1, 25 November 2017**
+### v1.1.0, 25 November 2017
 
 * permits any container element
 * link to other URLs can be retained
 * mutation observer event detects elements added via JavaScript
 * minor performance tweaks
 
-**v1.0, 16 January 2017**
+### v1.0.0, 16 January 2017
 
 * Initial commit
