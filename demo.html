@@ -35,9 +35,10 @@
       <li>supports any image type (JPEG photographs are most appropriate)</li>
       <li>supports responsive images (<code>srcset</code> and <code>sizes</code> attributes)</li>
       <li>supports CSS background images</li>
-      <li>small: 1,300 bytes of JavaScript, 440 bytes of CSS (minified)</li>
+      <li>small: 1,340 bytes of JavaScript, 440 bytes of CSS (minified)</li>
       <li>any CSS reveal effect can be applied</li>
       <li>no external dependencies - works with any framework</li>
+      <li>makes up to three attempts if images fail to download</li>
       <li>works in all modern browsers (IE10+)</li>
       <li>progressively-enhanced to work in older browsers</li>
       <li>easy to use</li>
@@ -55,8 +56,8 @@
 
     <p>The page must load the CSS and JavaScript. It can be placed anywhere on the page but, typically, the CSS is loaded in the <code>&lt;head&gt;</code> and the JS is loaded just before the closing <code>&lt;/body&gt;</code> tag:</p>
 
-    <pre><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/progressive-image.js@1.3.0/dist/progressive-image.css&quot;&gt;
-&lt;script src=&quot;https://cdn.jsdelivr.net/npm/progressive-image.js@1.3.0/dist/progressive-image.js&quot;&gt;&lt;/script&gt;</code></pre>
+    <pre><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/progressive-image.js/dist/progressive-image.css&quot;&gt;
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/progressive-image.js/dist/progressive-image.js&quot;&gt;&lt;/script&gt;</code></pre>
 
     <p>CDN URLs are shown above but you can also <code>npm i progressive-image.js</code> to install via npm and use a bundler.</p>
 

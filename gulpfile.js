@@ -9,9 +9,7 @@ const
     in: 'src/css/progressive-image.css',
     out: 'dist/',
     process: [
-      require('autoprefixer')({
-        browsers: ['> 1%', 'ie 11']
-      }),
+      require('autoprefixer'),
       require('cssnano')
     ]
   },
@@ -25,11 +23,15 @@ const
         toplevel: true
       },
       compress: {
+        passes: 5,
         drop_console: true
       },
       output: {
         quote_style: 1
-      }
+      },
+      ecma: 5,
+      ie8: false,
+      module: false
     }
   };
 
