@@ -11,7 +11,7 @@ Please use the code as you wish. [Tweet me @craigbuckler](https://twitter.com/cr
 * supports any image type (JPEG photographs are most appropriate)
 * supports responsive images (`srcset` and `sizes` attributes)
 * supports CSS background images
-* small: 1,340 bytes of JavaScript, 440 bytes of CSS (minified)
+* small: 1,350 bytes of JavaScript, 440 bytes of CSS (minified)
 * any CSS reveal effect can be applied
 * no external dependencies - works with any framework
 * makes up to three attempts if images fail to download
@@ -44,11 +44,9 @@ Where:
 * `full.jpg` is the large image.
 * `tiny.jpg` is a very small preview image - typically 20px in width saved with high JPEG compression. It be added to the page directly or inlined as a data URI.
 
-*Both images must have the same aspect ratio.*
+**Both images must have the same aspect ratio.**
 
-If image loading or JavaScript fails, a blurred version of the preview image can be clicked to view the full image.
-
-When JavaScript runs successfully, the large image is loaded and revealed when the preview is scrolled into view. The link click is disabled and resulting HTML will be:
+The full image is revealed when the preview is scrolled into view. After replacement, link-clicking is disabled and the HTML becomes:
 
 ```html
 <a href="full.jpg" class="progressive">
@@ -56,7 +54,17 @@ When JavaScript runs successfully, the large image is loaded and revealed when t
 </a>
 ```
 
-Responsive images of differing sizes and resolutions can be defined in the link using the `data-srcset` and `data-sizes` attributes which map to the standard `srcset` and `sizes` attributes, e.g.
+If JavaScript or image loading fails, a blurred version of the preview image can be clicked to view the full image.
+
+To retain the link or use an alternative container element, add a `data-href` attribute with the large image URL:
+
+```html
+<a href="http://site.com/" data-href="full.jpg" class="progressive replace">
+  <img src="tiny.jpg" class="preview" alt="image" />
+</a>
+```
+
+Responsive images of differing sizes and resolutions can be defined in the container link/element using `data-srcset` and `data-sizes` attributes which map to the standard `srcset` and `sizes` attributes:
 
 ```html
 <a href="small.jpg"
@@ -74,11 +82,18 @@ On replacement, the image code becomes:
 <img src="small.jpg" srcset="small.jpg 800w, large.jpg 1200w" sizes="100vw" alt="image" />
 ```
 
-Modern browsers will load `large.jpg` on screens of 800px width or greater.
+Modern browsers will load `large.jpg` when the viewport width is 800px or greater.
 
 Further examples, options and usage notes can be found on the [demonstration page](https://codepen.io/craigbuckler/pen/yPqLXW).
 
+
 ## Version history
+
+### v1.4.1, 9 June 2019
+
+* strict mode
+* srcset and sizes attributes only set when available
+* README and demo.html update
 
 ### v1.4.0, 24 June 2019
 
