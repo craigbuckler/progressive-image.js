@@ -89,7 +89,7 @@ Further examples, options and usage notes can be found on the [demonstration pag
 
 ## Version history
 
-### v1.4.1, 9 June 2019
+### v1.4.1, 9 July 2019
 
 * strict mode
 * srcset and sizes attributes only set when available
