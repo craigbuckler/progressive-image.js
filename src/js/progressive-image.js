@@ -2,6 +2,8 @@
 // by Craig Buckler, @craigbuckler
 if (window.addEventListener && window.requestAnimationFrame && document.getElementsByClassName) window.addEventListener('load', function() {
 
+  'use strict';
+
   // start
   var pItem = document.getElementsByClassName('progressive replace'), pCount, timer;
 
@@ -68,10 +70,10 @@ if (window.addEventListener && window.requestAnimationFrame && document.getEleme
     if (!href) return;
 
     // load image
-    var img = new Image();
-    if (item.dataset) {
-      img.srcset = item.dataset.srcset || '';
-      img.sizes = item.dataset.sizes || '';
+    var img = new Image(), ds = item.dataset;
+    if (ds) {
+      if (ds.srcset) img.srcset = ds.srcset;
+      if (ds.sizes) img.sizes = ds.sizes;
     }
     img.onload = addImg;
     retry = 1 + (retry || 0);
@@ -100,7 +102,7 @@ if (window.addEventListener && window.requestAnimationFrame && document.getEleme
 
           // remove preview image
           if (pImg) {
-            img.alt = pImg.alt || '';
+            if (pImg.alt) img.alt = pImg.alt;
             item.removeChild(pImg);
           }
 

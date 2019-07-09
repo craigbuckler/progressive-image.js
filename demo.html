@@ -35,7 +35,7 @@
       <li>supports any image type (JPEG photographs are most appropriate)</li>
       <li>supports responsive images (<code>srcset</code> and <code>sizes</code> attributes)</li>
       <li>supports CSS background images</li>
-      <li>small: 1,340 bytes of JavaScript, 440 bytes of CSS (minified)</li>
+      <li>small: 1,350 bytes of JavaScript, 440 bytes of CSS (minified)</li>
       <li>any CSS reveal effect can be applied</li>
       <li>no external dependencies - works with any framework</li>
       <li>makes up to three attempts if images fail to download</li>
@@ -48,9 +48,10 @@
       <img src="https://ucarecdn.com/dc3dad83-e7b5-44cd-841a-dbf4000005d6/-/resize/32x/-/quality/lightest/party.jpg" class="preview" alt="party" />
     </a>
 
-    <p>The preview image can be very small - perhaps 20px in width and saved with high JPEG compression. This typically results in an image less than 500 bytes in size. It be added to the page directly or inlined as a data URI using base-64 encoding.</p>
+    <p>The preview image can be very small - perhaps 20px in width and saved with high JPEG compression. This typically results in an image less than 500 bytes in size. It be added to the page directly or inlined as a base-64 data URI.</p>
 
-    <p>The large image can be any size but should match the preview image's aspect ratio. For example, 20x15 can be scaled to 200x150, 400x300 or 1600x1200.</p>
+    <p>The large image can be any size but it must match the preview image's aspect ratio. For example, a preview image of 20x15 could be used for large image sizes including 200x150, 400x300, 1600x1200, etc. The page layout will jump if differing aspect ratios are used.</p>
+
 
     <h2>Basic example</h2>
 
@@ -61,39 +62,45 @@
 
     <p>CDN URLs are shown above but you can also <code>npm i progressive-image.js</code> to install via npm and use a bundler.</p>
 
-    <p>The simplest progressive image is a link to the full-size graphic around the preview. Note the <code>progressive</code> and <code>replace</code> classes on the link and the <code>preview</code> class on the image.</p>
+    <p>Create a link to the full-size image from the preview <code>img</code>. Add <code>progressive</code> and <code>replace</code> classes to the link and a <code>preview</code> class to the image:</p>
 
     <pre><code>&lt;a href=&quot;full.jpg&quot; class=&quot;progressive replace&quot;&gt;
   &lt;img src=&quot;tiny.jpg&quot; class=&quot;preview&quot; alt=&quot;image&quot; /&gt;
 &lt;/a&gt;</code></pre>
 
-    <p>If image loading or JavaScript fails, a blurred version of the preview image can be clicked to view the full image:</p>
+    <p><strong>The preview and full-size images must have the same aspect ratio</strong>, e.g. 40x30 and 800x600.</p>
 
-    <a href="https://ucarecdn.com/718f79c5-2868-41c8-b56e-c87237674adb/-/resize/500x/man.jpg" class="full progressive">
-      <img src="https://ucarecdn.com/718f79c5-2868-41c8-b56e-c87237674adb/-/resize/32x/man.jpg" class="preview" alt="man" />
-    </a>
-
-    <p>When JavaScript runs successfully, the large image is revealed when the preview is scrolled into view. CSS3 effects are used to fade and zoom the image:</p>
+    <p>The full image is revealed when the preview is scrolled into view. CSS3 effects are used to fade and zoom the image:</p>
 
     <a href="https://ucarecdn.com/718f79c5-2868-41c8-b56e-c87237674adb/-/resize/500x/man.jpg" class="full progressive replace">
       <img src="https://ucarecdn.com/718f79c5-2868-41c8-b56e-c87237674adb/-/resize/32x/man.jpg" class="preview" alt="man" />
     </a>
 
-    <p>After replacement, the link click is disabled and resulting HTML will be:</p>
+    <p>After replacement, link-clicking is disabled and the HTML becomes:</p>
 
     <pre><code>&lt;a href=&quot;full.jpg&quot; class=&quot;progressive&quot;&gt;
   &lt;img src=&quot;full.jpg&quot; alt=&quot;image&quot; /&gt;
 &lt;/a&gt;</code></pre>
 
+    <p>If JavaScript or image loading fails, a blurred version of the preview image can be clicked to view the full image:</p>
+
+    <a href="https://ucarecdn.com/718f79c5-2868-41c8-b56e-c87237674adb/-/resize/500x/man.jpg" class="full progressive">
+      <img src="https://ucarecdn.com/718f79c5-2868-41c8-b56e-c87237674adb/-/resize/32x/man.jpg" class="preview" alt="man" />
+    </a>
+
+
     <h2>Retain the link</h2>
 
-    <p>If you require a responsive image to remain a real link, use the <code>href</code> for the address then add a <code>data-href</code> attribute with the large image URL:</p>
+    <p>If you require a responsive image to remain a real link, use the <code>href</code> for the link address and add a <code>data-href</code> attribute with the large image URL:</p>
 
     <pre><code>&lt;a href=&quot;http://site.com/&quot;
    data-href=&quot;full.jpg&quot;
    class=&quot;progressive replace&quot;&gt;
      &lt;img src=&quot;tiny.jpg&quot; class=&quot;preview&quot; alt=&quot;image&quot; /&gt;
 &lt;/a&gt;</code></pre>
+
+    <p>Note that users will not be able to view the full image if downloading or JavaScript fails.</p>
+
 
     <h2>Alternative container elements</h2>
 
@@ -103,9 +110,12 @@
   &lt;img src=&quot;tiny.jpg&quot; class=&quot;preview&quot; alt=&quot;image&quot; /&gt;
 &lt;/figure&gt;</code></pre>
 
+    <p>Note that users will not be able to view the full image if downloading or JavaScript fails.</p>
+
+
     <h2>Responsive images</h2>
 
-    <p><a href="https://www.sitepoint.com/how-to-build-responsive-images-with-srcset/">Responsive images</a> of differing sizes and resolutions can be defined in the container link/element using the <code>data-srcset</code> and <code>data-sizes</code> attributes which map to the standard <code>srcset</code> and <code>sizes</code> attributes, e.g.</p>
+    <p><a href="https://www.sitepoint.com/how-to-build-responsive-images-with-srcset/">Responsive images</a> of differing sizes and resolutions can be defined in the container link/element using <code>data-srcset</code> and <code>data-sizes</code> attributes which map to the standard <code>srcset</code> and <code>sizes</code> attributes, e.g.</p>
 
     <pre><code>&lt;a href=&quot;small.jpg&quot;
    data-srcset=&quot;small.jpg 800w, large.jpg 1200w&quot;
@@ -123,7 +133,7 @@
      sizes=&quot;100vw&quot;
      alt=&quot;image&quot; /&gt;</code></pre>
 
-    <p>Modern browsers will load large.jpg on screens of 800px width or greater.</p>
+    <p>Modern browsers will load large.jpg when the viewport width is 800px or greater.</p>
 
     <h2>CSS background images</h2>
 
@@ -135,7 +145,7 @@
 
     <pre><code>&lt;div class=&quot;bgimg progressive replace&quot;&gt;content&lt;/div&gt;</code></pre>
 
-    <p>The <code>bgimg</code> class can be any CSS selector. Set the full-size image in your CSS as normal, e.g.</p>
+    <p>Any CSS selector can be used - a <code>bgimg</code> class has been added in this example. Set the full-size image in your CSS as normal, e.g.</p>
 
     <pre><code>.bgimg {
   background: url(large.jpg) 50% 50% no-repeat;
@@ -150,25 +160,25 @@
 
     <p><code>tiny.jpg</code> is replaced with <code>large.jpg</code> as soon as the element appears in the viewport. Media queries can be used to load images of appropriate sizes.</p>
 
-    <p>No CSS3 animation effects can be applied to background images. If effects are required, use a real image, set <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit">CSS <code>object-fit: cover</code></a>, and ensure it falls below other content in the container.</p>
+    <p>No CSS3 animation effects can be applied to background images. If effects are required, use a real image, set <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit">CSS <code>object-fit: cover</code></a>, and ensure it is rendered below other content in the container.</p>
+
 
     <h2>Usage notes</h2>
 
     <ol>
-      <li>Works in all browsers from IE10 and above. IE10/11 will not blur the preview image. Older browsers fallback to click-to-view.</li>
-
-      <li>The preview and full-size images must have identical aspect ratios, e.g. 20x10 and 1200x600.</li>
+      <li><code>progressive-image.js</code> works in all browsers from IE10 and above. IE10/11 will not blur the preview image. Older browsers fallback to click-to-view.</li>
 
       <li>Only vertical scrolling is checked. All images in the horizontal plane will be loaded.</li>
 
-      <li>Progressive images dynamically added to the page using JavaScript will be replaced if the browser supports <code>MutationObserver</code> or when the viewport is scrolled/resized.</li>
+      <li>Progressive images dynamically added to the page using JavaScript are loaded if the browser supports <code>MutationObserver</code> or when the viewport is scrolled/resized.</li>
 
-      <li>You may improve actual or perceived performance using <a href="https://css-tricks.com/data-uris/">data URIs to inline images</a> or <a href="http://daverupert.com/2015/12/intrinsic-placeholders-with-picture/">intrinsic placeholders</a>.</li>
+      <li>Actual or perceived performance may be improved using an SVG preview image, <a href="https://css-tricks.com/data-uris/">inlined data URIs</a>, or <a href="http://daverupert.com/2015/12/intrinsic-placeholders-with-picture/">intrinsic placeholders</a>.</li>
     </ol>
 
-    <h2>Images</h2>
 
-    <p>All images in this demonstration have been sourced from <a href="https://unsplash.com/">unsplash.com</a> and are credited to Alex Blăjan, Philippe Toupet, James Padolsey, Ashim D’Silva, and Levi Guzman.</p>
+    <h2>Image credit</h2>
+
+    <p>Images in this demonstration have been sourced from <a href="https://unsplash.com/">unsplash.com</a> and are credited to Alex Blăjan, Philippe Toupet, James Padolsey, Ashim D'Silva, and Levi Guzman.</p>
 
     <a href="https://ucarecdn.com/0ece37a9-3e7e-4692-9f95-d8dd0401345b/bridge.jpg" data-srcset="https://ucarecdn.com/0ece37a9-3e7e-4692-9f95-d8dd0401345b/-/resize/400x/bridge.jpg 400w, https://ucarecdn.com/0ece37a9-3e7e-4692-9f95-d8dd0401345b/-/resize/800x/bridge.jpg 800w, https://ucarecdn.com/0ece37a9-3e7e-4692-9f95-d8dd0401345b/bridge.jpg 1600w" class="primary progressive replace">
       <img src="https://ucarecdn.com/0ece37a9-3e7e-4692-9f95-d8dd0401345b/-/resize/32x/-/grayscale/-/quality/lightest/bridge.jpg" class="preview" alt="bridge" />
