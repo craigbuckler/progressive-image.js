@@ -86,6 +86,8 @@ Modern browsers will load `large.jpg` when the viewport width is 800px or greate
 
 Further examples, options and usage notes can be found on the [demonstration page](https://codepen.io/craigbuckler/pen/yPqLXW).
 
+See [How to Build Your Own Progressive Image Loader](https://www.sitepoint.com/how-to-build-your-own-progressive-image-loader/) for information about the inspiration and techniques used in this component.
+
 
 ## Version history
 
