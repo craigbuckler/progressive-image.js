@@ -96,6 +96,9 @@ if (window.addEventListener && window.requestAnimationFrame && document.getEleme
 
         // preview image
         var pImg = item.querySelector && item.querySelector('img.preview');
+        
+        // copy preview image class list
+        var classList = pImg.classList
 
         // add full image
         item.insertBefore(img, pImg && pImg.nextSibling).addEventListener('animationend', function() {
@@ -106,6 +109,9 @@ if (window.addEventListener && window.requestAnimationFrame && document.getEleme
             item.removeChild(pImg);
           }
 
+          // copy the class list of preview to full image
+          img.classList = classList;
+          img.classList.remove('preview');
           img.classList.remove('reveal');
 
         });
