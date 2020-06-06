@@ -1,6 +1,6 @@
 {
   "name": "progressive-image.js",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "description": "progressive lazy-loading image system",
   "main": "dist/progressive-image.js",
   "files": [
@@ -33,7 +33,7 @@
     "ie 11"
   ],
   "devDependencies": {
-    "autoprefixer": "^9.6.1",
+    "autoprefixer": "^9.8.0",
     "cssnano": "^4.1.10",
     "gulp": "^4.0.2",
     "gulp-postcss": "^8.0.0",

@@ -1,23 +1,27 @@
 // progressive-image.js
 // by Craig Buckler, @craigbuckler
-if (window.addEventListener && window.requestAnimationFrame && document.getElementsByClassName) window.addEventListener('load', function() {
+if (window.addEventListener && document.body.classList) window.addEventListener('load', function() {
 
   'use strict';
 
-  // start
-  var pItem = document.getElementsByClassName('progressive replace'), pCount, timer;
+  var
+    classReplace = 'replace',
+    classPreview = 'preview',
+    classReveal = 'reveal',
+    pItem = document.getElementsByClassName('progressive ' + classReplace),
+    rAF = window.requestAnimationFrame || function(f) { f(); },
+    timer;
 
-  // scroll and resize events
-  window.addEventListener('scroll', scroller, false);
-  window.addEventListener('resize', scroller, false);
+  // bind events
+  ['pageshow', 'scroll', 'resize'].forEach(function(h) {
+    window.addEventListener(h, throttle, { passive: true });
+  });
 
   // DOM mutation observer
-  if (MutationObserver) {
+  if (window.MutationObserver) {
 
-    var observer = new MutationObserver(function() {
-      if (pItem.length !== pCount) inView();
-    });
-    observer.observe(document.body, { subtree: true, childList: true, attributes: true, characterData: true });
+    var observer = new MutationObserver(throttle);
+    observer.observe(document.body, { subtree: true, childList: true, attributes: true });
 
   }
 
@@ -25,8 +29,8 @@ if (window.addEventListener && window.requestAnimationFrame && document.getEleme
   inView();
 
 
-  // throttled scroll/resize
-  function scroller() {
+  // throttle events, no more than once every 300ms
+  function throttle() {
 
     timer = timer || setTimeout(function() {
       timer = null;
@@ -39,7 +43,7 @@ if (window.addEventListener && window.requestAnimationFrame && document.getEleme
   // image in view?
   function inView() {
 
-    if (pItem.length) requestAnimationFrame(function() {
+    if (pItem.length) rAF(function() {
 
       var wH = window.innerHeight, cRect, cT, cH, p = 0;
       while (p < pItem.length) {
@@ -50,13 +54,10 @@ if (window.addEventListener && window.requestAnimationFrame && document.getEleme
 
         if (0 < cT + cH && wH > cT) {
           loadFullImage(pItem[p]);
-          pItem[p].classList.remove('replace');
         }
         else p++;
 
       }
-
-      pCount = pItem.length;
 
     });
 
@@ -65,6 +66,8 @@ if (window.addEventListener && window.requestAnimationFrame && document.getEleme
 
   // replace with full image
   function loadFullImage(item, retry) {
+
+    item.classList.remove(classReplace);
 
     var href = item && (item.getAttribute('data-href') || item.href);
     if (!href) return;
@@ -80,22 +83,24 @@ if (window.addEventListener && window.requestAnimationFrame && document.getEleme
     if (retry < 3) img.onerror = function() {
       setTimeout(function() { loadFullImage(item, retry); }, retry * 3000);
     };
-    img.className = 'reveal';
     img.src = href;
 
     // replace image
     function addImg() {
 
-      requestAnimationFrame(function() {
+      rAF(function() {
 
-        // disable click
+        // disable link click
         if (href === item.href) {
           item.style.cursor = 'default';
-          item.addEventListener('click', function(e) { e.preventDefault(); }, false);
+          item.addEventListener('click', function(e) { e.preventDefault(); });
         }
 
         // preview image
-        var pImg = item.querySelector && item.querySelector('img.preview');
+        var pImg = item.querySelector && item.querySelector('img.' + classPreview), imgClass = img.classList;
+        img.className = pImg.className;
+        imgClass.remove(classPreview);
+        imgClass.add(classReveal);
 
         // add full image
         item.insertBefore(img, pImg && pImg.nextSibling).addEventListener('animationend', function() {
@@ -106,7 +111,7 @@ if (window.addEventListener && window.requestAnimationFrame && document.getEleme
             item.removeChild(pImg);
           }
 
-          img.classList.remove('reveal');
+          imgClass.remove(classReveal);
 
         });
 
