@@ -22,11 +22,11 @@
     <p>Please use the code as you wish. <a href="https://twitter.com/craigbuckler">Tweet me @craigbuckler</a> if you find it useful and <a href="https://gum.co/vIjey">donate toward development</a> if you use it commercially.</p>
 
     <a href="https://ucarecdn.com/1b73ebf8-b2d6-40cc-abd6-945d4df883c9/mountain.jpg" data-srcset="https://ucarecdn.com/1b73ebf8-b2d6-40cc-abd6-945d4df883c9/-/resize/400x/mountain.jpg 400w, https://ucarecdn.com/1b73ebf8-b2d6-40cc-abd6-945d4df883c9/-/resize/800x/mountain.jpg 800w, https://ucarecdn.com/1b73ebf8-b2d6-40cc-abd6-945d4df883c9/mountain.jpg 1600w" class="primary progressive replace">
-      <img src="https://ucarecdn.com/1b73ebf8-b2d6-40cc-abd6-945d4df883c9/-/resize/32x/-/grayscale/-/quality/lightest/mountain.jpg" class="preview" alt="mountain" />
+      <img src="https://ucarecdn.com/1b73ebf8-b2d6-40cc-abd6-945d4df883c9/-/resize/32x/-/grayscale/-/quality/lightest/mountain.jpg" class="preview" loading="lazy" width="32" height="8" alt="mountain" />
     </a>
 
     <a href="https://ucarecdn.com/b86e2dd6-fb4d-49bb-93ff-86b596a69fcb/-/resize/500x/cave.jpg" class="boxout2 progressive replace">
-      <img src="https://ucarecdn.com/b86e2dd6-fb4d-49bb-93ff-86b596a69fcb/-/resize/32x/-/quality/lightest/cave.jpg" class="preview" alt="cave" />
+      <img src="https://ucarecdn.com/b86e2dd6-fb4d-49bb-93ff-86b596a69fcb/-/resize/32x/-/quality/lightest/cave.jpg" class="preview" loading="lazy" width="32" height="24" alt="cave" />
     </a>
 
     <ul>
@@ -35,7 +35,8 @@
       <li>supports any image type (JPEG photographs are most appropriate)</li>
       <li>supports responsive images (<code>srcset</code> and <code>sizes</code> attributes)</li>
       <li>supports CSS background images</li>
-      <li>small: 1,350 bytes of JavaScript, 440 bytes of CSS (minified)</li>
+      <li>supports native lazy loading and aspect ratios</li>
+      <li>small: 1,322 bytes of JavaScript, 408 bytes of CSS (minified)</li>
       <li>any CSS reveal effect can be applied</li>
       <li>no external dependencies - works with any framework</li>
       <li>makes up to three attempts if images fail to download</li>
@@ -45,7 +46,7 @@
     </ul>
 
     <a href="https://unsplash.com/" data-href="https://ucarecdn.com/dc3dad83-e7b5-44cd-841a-dbf4000005d6/-/resize/500x/party.jpg" class="boxout1 progressive replace">
-      <img src="https://ucarecdn.com/dc3dad83-e7b5-44cd-841a-dbf4000005d6/-/resize/32x/-/quality/lightest/party.jpg" class="preview" alt="party" />
+      <img src="https://ucarecdn.com/dc3dad83-e7b5-44cd-841a-dbf4000005d6/-/resize/32x/-/quality/lightest/party.jpg" class="preview" loading="lazy" width="32" height="24" alt="party" />
     </a>
 
     <p>The preview image can be very small - perhaps 20px in width and saved with high JPEG compression. This typically results in an image less than 500 bytes in size. It be added to the page directly or inlined as a base-64 data URI.</p>
@@ -73,7 +74,7 @@
     <p>The full image is revealed when the preview is scrolled into view. CSS3 effects are used to fade and zoom the image:</p>
 
     <a href="https://ucarecdn.com/718f79c5-2868-41c8-b56e-c87237674adb/-/resize/500x/man.jpg" class="full progressive replace">
-      <img src="https://ucarecdn.com/718f79c5-2868-41c8-b56e-c87237674adb/-/resize/32x/man.jpg" class="preview" alt="man" />
+      <img src="https://ucarecdn.com/718f79c5-2868-41c8-b56e-c87237674adb/-/resize/32x/man.jpg" class="preview" loading="lazy" width="32" height="18" alt="man" />
     </a>
 
     <p>After replacement, link-clicking is disabled and the HTML becomes:</p>
@@ -82,11 +83,25 @@
   &lt;img src=&quot;full.jpg&quot; alt=&quot;image&quot; /&gt;
 &lt;/a&gt;</code></pre>
 
+    <p>Any <code>class</code> names applied to the preview image are applied to the full image (except <code>preview</code>).</p>
+
     <p>If JavaScript or image loading fails, a blurred version of the preview image can be clicked to view the full image:</p>
 
     <a href="https://ucarecdn.com/718f79c5-2868-41c8-b56e-c87237674adb/-/resize/500x/man.jpg" class="full progressive">
-      <img src="https://ucarecdn.com/718f79c5-2868-41c8-b56e-c87237674adb/-/resize/32x/man.jpg" class="preview" alt="man" />
+      <img src="https://ucarecdn.com/718f79c5-2868-41c8-b56e-c87237674adb/-/resize/32x/man.jpg" class="preview" loading="lazy" width="32" height="18" alt="man" />
     </a>
+
+
+    <h2>Native lazy-loading</h2>
+
+    <p>To maximize performance, add <code>width</code>, <code>height</code>, and <code>loading="lazy"</code> attributes to the preview image:</p>
+
+    <pre><code>&lt;img src=&quot;tiny.jpg&quot; class=&quot;preview&quot;
+  width=&quot;20&quot; height=&quot;15&quot;
+  loading=&quot;lazy&quot;
+  alt=&quot;image&quot; /&gt;</code></pre>
+
+    <p>Modern browsers will set the correct aspect ratio before loading the preview shortly before it is scrolled into view.</p>
 
 
     <h2>Retain the link</h2>
@@ -104,7 +119,7 @@
 
     <h2>Alternative container elements</h2>
 
-    <p>If necessary, any HTML element can be used with a <code>data-href</code> attribute rather than a link, e.g.</p>
+    <p>If necessary, most HTML container elements can be used with a <code>data-href</code> attribute rather than a link, e.g.</p>
 
     <pre><code>&lt;figure data-href=&quot;full.jpg&quot; class=&quot;progressive replace&quot;&gt;
   &lt;img src=&quot;tiny.jpg&quot; class=&quot;preview&quot; alt=&quot;image&quot; /&gt;
@@ -160,29 +175,31 @@
 
     <p><code>tiny.jpg</code> is replaced with <code>large.jpg</code> as soon as the element appears in the viewport. Media queries can be used to load images of appropriate sizes.</p>
 
-    <p>No CSS3 animation effects can be applied to background images. If effects are required, use a real image, set <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit">CSS <code>object-fit: cover</code></a>, and ensure it is rendered below other content in the container.</p>
+    <p>CSS3 animation effects cannot be applied to background images. If effects are required, use a real image, set <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit">CSS <code>object-fit: cover</code></a>, and ensure it is rendered below other content in the container.</p>
 
 
     <h2>Usage notes</h2>
 
     <ol>
-      <li><code>progressive-image.js</code> works in all browsers from IE10 and above. IE10/11 will not blur the preview image. Older browsers fallback to click-to-view.</li>
+      <li>Do not use inappropriate container elements such as <code>&lt;picture&gt;</code>, <code>&lt;video&gt;</code>, <code>&lt;audio&gt;</code>, <code>&lt;iframe&gt;</code> etc.</li>
 
-      <li>Only vertical scrolling is checked. All images in the horizontal plane will be loaded.</li>
+      <li><code>progressive-image.js</code> works in all browsers from IE10 and above. IE10/11 will not smoothly blur the preview image. Older browsers fallback to click-to-view.</li>
 
-      <li>Progressive images dynamically added to the page using JavaScript are loaded if the browser supports <code>MutationObserver</code> or when the viewport is scrolled/resized.</li>
+      <li>Only vertical scrolling is checked. All images in the horizontal plane will be loaded, so it may not be suitable for carousels.</li>
+
+      <li>Progressive images dynamically added to the page using JavaScript are handled if a navigation event occurs or the browser supports <code>MutationObserver</code>.</li>
 
       <li>Actual or perceived performance may be improved using an SVG preview image, <a href="https://css-tricks.com/data-uris/">inlined data URIs</a>, or <a href="http://daverupert.com/2015/12/intrinsic-placeholders-with-picture/">intrinsic placeholders</a>.</li>
     </ol>
-
 
     <h2>Image credit</h2>
 
     <p>Images in this demonstration have been sourced from <a href="https://unsplash.com/">unsplash.com</a> and are credited to Alex Blăjan, Philippe Toupet, James Padolsey, Ashim D'Silva, and Levi Guzman.</p>
 
     <a href="https://ucarecdn.com/0ece37a9-3e7e-4692-9f95-d8dd0401345b/bridge.jpg" data-srcset="https://ucarecdn.com/0ece37a9-3e7e-4692-9f95-d8dd0401345b/-/resize/400x/bridge.jpg 400w, https://ucarecdn.com/0ece37a9-3e7e-4692-9f95-d8dd0401345b/-/resize/800x/bridge.jpg 800w, https://ucarecdn.com/0ece37a9-3e7e-4692-9f95-d8dd0401345b/bridge.jpg 1600w" class="primary progressive replace">
-      <img src="https://ucarecdn.com/0ece37a9-3e7e-4692-9f95-d8dd0401345b/-/resize/32x/-/grayscale/-/quality/lightest/bridge.jpg" class="preview" alt="bridge" />
+      <img src="https://ucarecdn.com/0ece37a9-3e7e-4692-9f95-d8dd0401345b/-/resize/32x/-/grayscale/-/quality/lightest/bridge.jpg" class="preview" loading="lazy" width="32" height="8" alt="bridge" />
     </a>
+
   </article>
 
 </main>

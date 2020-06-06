@@ -11,7 +11,8 @@ Please use the code as you wish. [Tweet me @craigbuckler](https://twitter.com/cr
 * supports any image type (JPEG photographs are most appropriate)
 * supports responsive images (`srcset` and `sizes` attributes)
 * supports CSS background images
-* small: 1,350 bytes of JavaScript, 440 bytes of CSS (minified)
+* supports native lazy loading and aspect ratios
+* small: 1,322 bytes of JavaScript, 408 bytes of CSS (minified)
 * any CSS reveal effect can be applied
 * no external dependencies - works with any framework
 * makes up to three attempts if images fail to download
@@ -54,6 +55,8 @@ The full image is revealed when the preview is scrolled into view. After replace
 </a>
 ```
 
+Any `class` names applied to the preview are applied to the full image (except `preview`).
+
 If JavaScript or image loading fails, a blurred version of the preview image can be clicked to view the full image.
 
 To retain the link or use an alternative container element, add a `data-href` attribute with the large image URL:
@@ -90,6 +93,15 @@ See [How to Build Your Own Progressive Image Loader](https://www.sitepoint.com/h
 
 
 ## Version history
+
+### v1.5.0, 6 June 2020
+
+* `pageshow` event for Single Page Apps
+* more reliable MutationObserver
+* `class` names applied to the preview are applied to the full image (except `preview`)
+* smaller, better performance
+* no errors in older browsers
+* updated usage notes, including native lazy loading
 
 ### v1.4.1, 9 July 2019
 
