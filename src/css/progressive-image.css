@@ -23,7 +23,7 @@
   position: absolute;
   left: 0;
   top: 0;
-  animation: progressiveReveal 1s ease-out;
+  animation: progressiveReveal 1s linear;
 }
 
 @keyframes progressiveReveal {

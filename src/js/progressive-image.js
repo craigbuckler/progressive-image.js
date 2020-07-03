@@ -1,8 +1,12 @@
 // progressive-image.js
 // by Craig Buckler, @craigbuckler
-if (window.addEventListener && document.body.classList) window.addEventListener('load', function() {
+if (window.addEventListener) window.addEventListener('load', function() {
 
   'use strict';
+
+  // browser supported?
+  var body = document.body;
+  if (!body.getElementsByClassName || !body.querySelector || !body.classList || !body.getBoundingClientRect) return;
 
   var
     classReplace = 'replace',
@@ -21,7 +25,7 @@ if (window.addEventListener && document.body.classList) window.addEventListener(
   if (window.MutationObserver) {
 
     var observer = new MutationObserver(throttle);
-    observer.observe(document.body, { subtree: true, childList: true, attributes: true });
+    observer.observe(body, { subtree: true, childList: true, attributes: true });
 
   }
 
@@ -67,50 +71,57 @@ if (window.addEventListener && document.body.classList) window.addEventListener(
   // replace with full image
   function loadFullImage(item, retry) {
 
+    // cancel monitoring
     item.classList.remove(classReplace);
 
-    var href = item && (item.getAttribute('data-href') || item.href);
-    if (!href) return;
+    // fetch href and preview image
+    var
+      href = item.getAttribute('data-href') || item.href,
+      pImg = item.querySelector('img.' + classPreview);
 
-    // load image
+    if (!href || !pImg) return;
+
+    // load main image
     var img = new Image(), ds = item.dataset;
+
     if (ds) {
       if (ds.srcset) img.srcset = ds.srcset;
       if (ds.sizes) img.sizes = ds.sizes;
     }
+
     img.onload = addImg;
+
+    // load failure retry
     retry = 1 + (retry || 0);
     if (retry < 3) img.onerror = function() {
       setTimeout(function() { loadFullImage(item, retry); }, retry * 3000);
     };
+
     img.src = href;
 
     // replace image
     function addImg() {
 
+      // disable link
+      if (href === item.href) {
+        item.style.cursor = 'default';
+        item.addEventListener('click', function(e) { e.preventDefault(); });
+      }
+
+      // apply image attributes
+      var imgClass = img.classList;
+      img.className = pImg.className;
+      imgClass.remove(classPreview);
+      imgClass.add(classReveal);
+      img.alt = pImg.alt || '';
+
       rAF(function() {
 
-        // disable link click
-        if (href === item.href) {
-          item.style.cursor = 'default';
-          item.addEventListener('click', function(e) { e.preventDefault(); });
-        }
-
-        // preview image
-        var pImg = item.querySelector && item.querySelector('img.' + classPreview), imgClass = img.classList;
-        img.className = pImg.className;
-        imgClass.remove(classPreview);
-        imgClass.add(classReveal);
-
         // add full image
-        item.insertBefore(img, pImg && pImg.nextSibling).addEventListener('animationend', function() {
+        item.insertBefore(img, pImg.nextSibling).addEventListener('animationend', function() {
 
           // remove preview image
-          if (pImg) {
-            if (pImg.alt) img.alt = pImg.alt;
-            item.removeChild(pImg);
-          }
-
+          item.removeChild(pImg);
           imgClass.remove(classReveal);
 
         });

@@ -1,10 +1,13 @@
 # progressive-image.js
 
-[**demonstration**](https://codepen.io/craigbuckler/pen/yPqLXW) | [**GitHub**](https://github.com/craigbuckler/progressive-image.js) | [**npm**](https://www.npmjs.com/package/progressive-image.js) | [**donate**](https://gum.co/vIjey) | [@craigbuckler](https://twitter.com/craigbuckler) | [craigbuckler.com](https://craigbuckler.com/)
+[**demonstration**](https://codepen.io/craigbuckler/full/yPqLXW) | [**GitHub**](https://github.com/craigbuckler/progressive-image.js) | [**npm**](https://www.npmjs.com/package/progressive-image.js) | [**donate**](https://gum.co/vIjey) | [@craigbuckler](https://twitter.com/craigbuckler) | [craigbuckler.com](https://craigbuckler.com/)
 
-A lazy-loading progressive image system similar to those seen on [Facebook](https://code.facebook.com/posts/991252547593574/the-technology-behind-preview-photos/) and [Medium](https://jmperezperez.com/medium-image-progressive-loading-placeholder/). A very small, blurred image is replaced with the full-resolution equivalent when the element is scrolled into view.
 
-Please use the code as you wish. [Tweet me @craigbuckler](https://twitter.com/craigbuckler) if you find it useful and [donate toward development](https://gum.co/vIjey) if you use it commercially.
+[progressive-image.js](https://github.com/craigbuckler/progressive-image.js) implements a progressively-loaded image effect similar to those seen on [Facebook](https://code.facebook.com/posts/991252547593574/the-technology-behind-preview-photos/) and [Medium](https://jmperezperez.com/medium-image-progressive-loading-placeholder/). A very small blurred image is replaced with the full-resolution equivalent when the element is scrolled into view.
+
+Please use the code as you wish. [Tweet me @craigbuckler](https://twitter.com/craigbuckler) if you find it useful and consider [donating toward development](https://gum.co/vIjey).
+
+Benefits:
 
 * saves unnecessary bandwidth
 * fast loading, high performance, images loaded on view
@@ -12,7 +15,7 @@ Please use the code as you wish. [Tweet me @craigbuckler](https://twitter.com/cr
 * supports responsive images (`srcset` and `sizes` attributes)
 * supports CSS background images
 * supports native lazy loading and aspect ratios
-* small: 1,322 bytes of JavaScript, 408 bytes of CSS (minified)
+* lightweight: 1,358 bytes of JavaScript, 407 bytes of CSS (minified)
 * any CSS reveal effect can be applied
 * no external dependencies - works with any framework
 * makes up to three attempts if images fail to download
@@ -20,8 +23,10 @@ Please use the code as you wish. [Tweet me @craigbuckler](https://twitter.com/cr
 * progressively-enhanced to work in older browsers
 * easy to use
 
+**[View demonstration and full documentation...](https://codepen.io/craigbuckler/full/yPqLXW)**
 
-## Usage instructions
+
+## Basic usage
 
 Include the minified CSS and JavaScript anywhere in your page:
 
@@ -30,9 +35,13 @@ Include the minified CSS and JavaScript anywhere in your page:
 <script src="https://cdn.jsdelivr.net/npm/progressive-image.js/dist/progressive-image.js"></script>
 ```
 
-CDN URLs are shown above but you can also `npm i progressive-image.js` to install via npm and use a bundler.
+or use [npm](https://www.npmjs.com/package/progressive-image.js) and a bundler:
 
-Basic example:
+```sh
+npm i progressive-image.js
+```
+
+Then add progressively-loaded images:
 
 ```html
 <a href="full.jpg" class="progressive replace">
@@ -40,59 +49,25 @@ Basic example:
 </a>
 ```
 
-Where:
+where:
 
 * `full.jpg` is the large image.
-* `tiny.jpg` is a very small preview image - typically 20px in width saved with high JPEG compression. It be added to the page directly or inlined as a data URI.
+* `tiny.jpg` is a small preview image - typically 20px width.
 
 **Both images must have the same aspect ratio.**
 
-The full image is revealed when the preview is scrolled into view. After replacement, link-clicking is disabled and the HTML becomes:
-
-```html
-<a href="full.jpg" class="progressive">
-  <img src="full.jpg" alt="image" />
-</a>
-```
-
-Any `class` names applied to the preview are applied to the full image (except `preview`).
-
-If JavaScript or image loading fails, a blurred version of the preview image can be clicked to view the full image.
-
-To retain the link or use an alternative container element, add a `data-href` attribute with the large image URL:
-
-```html
-<a href="http://site.com/" data-href="full.jpg" class="progressive replace">
-  <img src="tiny.jpg" class="preview" alt="image" />
-</a>
-```
-
-Responsive images of differing sizes and resolutions can be defined in the container link/element using `data-srcset` and `data-sizes` attributes which map to the standard `srcset` and `sizes` attributes:
-
-```html
-<a href="small.jpg"
-   data-srcset="small.jpg 800w, large.jpg 1200w"
-   data-sizes="100vw"
-   class="progressive replace">
-    <img src="tiny.jpg" class="preview" alt="image" />
-</a>
-
-```
-
-On replacement, the image code becomes:
-
-```html
-<img src="small.jpg" srcset="small.jpg 800w, large.jpg 1200w" sizes="100vw" alt="image" />
-```
-
-Modern browsers will load `large.jpg` when the viewport width is 800px or greater.
-
-Further examples, options and usage notes can be found on the [demonstration page](https://codepen.io/craigbuckler/pen/yPqLXW).
-
-See [How to Build Your Own Progressive Image Loader](https://www.sitepoint.com/how-to-build-your-own-progressive-image-loader/) for information about the inspiration and techniques used in this component.
+Refer to `demo.html` for full documentation, examples, options, and usage notes. It is also available as a [CodePen demonstration page](https://codepen.io/craigbuckler/full/yPqLXW).
 
 
 ## Version history
+
+### v1.6.0, 3 July 2020
+
+* improved browser support verification
+* more resilient to framework issues
+* minor refactoring
+* updated help and images
+* bugfix: script now works in HTML `<head>`
 
 ### v1.5.0, 6 June 2020
 

@@ -17,53 +17,82 @@
 
     <p><a href="https://github.com/craigbuckler/progressive-image.js"><strong>GitHub</strong></a> | <a href="https://www.npmjs.com/package/progressive-image.js"><strong>npm</strong></a> | <a href="https://gum.co/vIjey"><strong>donate</strong></a> | <a href="https://twitter.com/craigbuckler">@craigbuckler</a> | <a href="https://craigbuckler.com/">craigbuckler.com</a></p>
 
-    <p><code>progressive-image.js</code> implements a lazy-loading progressive image similar to those seen on <a href="https://code.facebook.com/posts/991252547593574/the-technology-behind-preview-photos/">Facebook</a> and <a href="https://jmperezperez.com/medium-image-progressive-loading-placeholder/">Medium</a>. A very small, blurred image is replaced with the full-resolution equivalent when the element is scrolled into view.</p>
+    <p><a href="https://github.com/craigbuckler/progressive-image.js"><code>progressive-image.js</code></a> implements a progressively-loaded image effect similar to those seen on <a href="https://code.facebook.com/posts/991252547593574/the-technology-behind-preview-photos/">Facebook</a> and <a href="https://jmperezperez.com/medium-image-progressive-loading-placeholder/">Medium</a>. A very small blurred image is replaced with the full-resolution equivalent when the element is scrolled into view. See <a href="https://www.sitepoint.com/how-to-build-your-own-progressive-image-loader/">How to Build Your Own Progressive Image Loader</a> for information about how it was initially developed.</p>
 
-    <p>Please use the code as you wish. <a href="https://twitter.com/craigbuckler">Tweet me @craigbuckler</a> if you find it useful and <a href="https://gum.co/vIjey">donate toward development</a> if you use it commercially.</p>
+    <p>Please use the code as you wish. <a href="https://twitter.com/craigbuckler">Tweet me @craigbuckler</a> if you find it useful and consider <a href="https://gum.co/vIjey">donating toward development</a>.</p>
 
-    <a href="https://ucarecdn.com/1b73ebf8-b2d6-40cc-abd6-945d4df883c9/mountain.jpg" data-srcset="https://ucarecdn.com/1b73ebf8-b2d6-40cc-abd6-945d4df883c9/-/resize/400x/mountain.jpg 400w, https://ucarecdn.com/1b73ebf8-b2d6-40cc-abd6-945d4df883c9/-/resize/800x/mountain.jpg 800w, https://ucarecdn.com/1b73ebf8-b2d6-40cc-abd6-945d4df883c9/mountain.jpg 1600w" class="primary progressive replace">
-      <img src="https://ucarecdn.com/1b73ebf8-b2d6-40cc-abd6-945d4df883c9/-/resize/32x/-/grayscale/-/quality/lightest/mountain.jpg" class="preview" loading="lazy" width="32" height="8" alt="mountain" />
+    <a href="https://res.cloudinary.com/oworks/image/upload/f_auto/v1593762372/pimage/iceland" data-srcset="https://res.cloudinary.com/oworks/image/upload/f_auto,c_scale,w_400/v1593762372/pimage/iceland 400w, https://res.cloudinary.com/oworks/image/upload/f_auto,c_scale,w_800/v1593762372/pimage/iceland 800w, https://res.cloudinary.com/oworks/image/upload/f_auto/v1593762372/pimage/iceland 1600w" class="primary progressive replace">
+      <img src="https://res.cloudinary.com/oworks/image/upload/f_auto,c_scale,w_32/v1593762372/pimage/iceland" class="preview" loading="lazy" width="32" height="8" alt="Iceland" />
     </a>
 
-    <a href="https://ucarecdn.com/b86e2dd6-fb4d-49bb-93ff-86b596a69fcb/-/resize/500x/cave.jpg" class="boxout2 progressive replace">
-      <img src="https://ucarecdn.com/b86e2dd6-fb4d-49bb-93ff-86b596a69fcb/-/resize/32x/-/quality/lightest/cave.jpg" class="preview" loading="lazy" width="32" height="24" alt="cave" />
+    <h2 id="contents">Contents</h2>
+
+    <ol>
+      <li><a href="#benefits">benefits</a></li>
+      <li><a href="#basic">basic example</a></li>
+      <li><a href="#native">native lazy-loading</a></li>
+      <li><a href="#link">retain the link</a></li>
+      <li><a href="#container">alternative container elements</a></li>
+      <li><a href="#responsive">responsive images (<code>srcset</code> and <code>sizes</code>)</a></li>
+      <li><a href="#reveal">custom reveal effects</a></li>
+      <li><a href="#background">CSS background images</a></li>
+      <li><a href="#notes">usage notes</a></li>
+    </ol>
+
+    <h2 id="benefits">Benefits</h2>
+
+    <a href="https://res.cloudinary.com/oworks/image/upload/f_auto/v1593769674/pimage/jump" class="boxout2 progressive replace">
+      <img src="https://res.cloudinary.com/oworks/image/upload/f_auto,c_scale,w_20/v1593769674/pimage/jump" class="preview" loading="lazy" width="20" height="15" alt="jump" />
     </a>
 
     <ul>
       <li>saves unnecessary bandwidth</li>
       <li>fast loading, high performance, images loaded on view</li>
       <li>supports any image type (JPEG photographs are most appropriate)</li>
-      <li>supports responsive images (<code>srcset</code> and <code>sizes</code> attributes)</li>
-      <li>supports CSS background images</li>
-      <li>supports native lazy loading and aspect ratios</li>
-      <li>small: 1,322 bytes of JavaScript, 408 bytes of CSS (minified)</li>
-      <li>any CSS reveal effect can be applied</li>
-      <li>no external dependencies - works with any framework</li>
+      <li>supports <a href="#responsive">responsive images</a> (<code>srcset</code> and <code>sizes</code> attributes)</li>
+      <li>supports <a href="#background">CSS background images</a></li>
+      <li>supports <a href="#native">native lazy loading and aspect ratios</a></li>
+      <li>lightweight: 1,358 bytes of JavaScript, 407 bytes of CSS (minified)</li>
+      <li>any <a href="#reveal">CSS reveal effect</a> can be applied</li>
+      <li>no external dependencies &ndash; works with any framework</li>
       <li>makes up to three attempts if images fail to download</li>
       <li>works in all modern browsers (IE10+)</li>
       <li>progressively-enhanced to work in older browsers</li>
       <li>easy to use</li>
     </ul>
 
-    <a href="https://unsplash.com/" data-href="https://ucarecdn.com/dc3dad83-e7b5-44cd-841a-dbf4000005d6/-/resize/500x/party.jpg" class="boxout1 progressive replace">
-      <img src="https://ucarecdn.com/dc3dad83-e7b5-44cd-841a-dbf4000005d6/-/resize/32x/-/quality/lightest/party.jpg" class="preview" loading="lazy" width="32" height="24" alt="party" />
+    <a href="https://res.cloudinary.com/oworks/image/upload/f_auto/v1593770219/pimage/canoe" class="boxout1 progressive replace">
+      <img src="https://res.cloudinary.com/oworks/image/upload/f_auto,c_scale,w_20/v1593770219/pimage/canoe" class="preview" loading="lazy" width="20" height="15" alt="canoe" />
     </a>
 
-    <p>The preview image can be very small - perhaps 20px in width and saved with high JPEG compression. This typically results in an image less than 500 bytes in size. It be added to the page directly or inlined as a base-64 data URI.</p>
+    <p>The preview image can be very small &ndash; perhaps 20px in width and saved with high JPEG compression. This typically results in an image less than 500 bytes in size. It be added to the page directly or inlined as a base-64 data URI.</p>
 
-    <p>The large image can be any size but it must match the preview image's aspect ratio. For example, a preview image of 20x15 could be used for large image sizes including 200x150, 400x300, 1600x1200, etc. The page layout will jump if differing aspect ratios are used.</p>
+    <p>The large image can be any size but it <strong>must match the preview image's aspect ratio</strong>. For example, a preview image of 20x15 could be used for large image sizes including 200x150, 400x300, 1600x1200, etc.</p>
+
+    <p><em>The page layout will re-layout and jump if differing aspect ratios are used.</em></p>
+
+    <p class="top"><a href="#contents">back to contents&hellip;</a></p>
 
 
-    <h2>Basic example</h2>
+    <h2 id="basic">Basic example</h2>
 
     <p>The page must load the CSS and JavaScript. It can be placed anywhere on the page but, typically, the CSS is loaded in the <code>&lt;head&gt;</code> and the JS is loaded just before the closing <code>&lt;/body&gt;</code> tag:</p>
 
     <pre><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/progressive-image.js/dist/progressive-image.css&quot;&gt;
 &lt;script src=&quot;https://cdn.jsdelivr.net/npm/progressive-image.js/dist/progressive-image.js&quot;&gt;&lt;/script&gt;</code></pre>
 
-    <p>CDN URLs are shown above but you can also <code>npm i progressive-image.js</code> to install via npm and use a bundler.</p>
+    <p>CDN URLs are shown above but you can also use <a href="https://www.npmjs.com/package/progressive-image.js"><code>npm</code></a> and a bundler:</p>
 
-    <p>Create a link to the full-size image from the preview <code>img</code>. Add <code>progressive</code> and <code>replace</code> classes to the link and a <code>preview</code> class to the image:</p>
+    <pre><code>npm i progressive-image.js</code></pre>
+
+    <p>To use the lazy loading effect:
+
+    <ol>
+      <li>add an <code>&lt;img&gt;</code> tag for the <strong>small image</strong> with a class of <code>preview</code></li>
+      <li>surround it with <code>&lt;a&gt;</code> link to the <strong>large image</strong> and add both <code>progressive replace</code> as classes</li>
+    </ol>
+
+    <p>Example:</p>
 
     <pre><code>&lt;a href=&quot;full.jpg&quot; class=&quot;progressive replace&quot;&gt;
   &lt;img src=&quot;tiny.jpg&quot; class=&quot;preview&quot; alt=&quot;image&quot; /&gt;
@@ -73,8 +102,8 @@
 
     <p>The full image is revealed when the preview is scrolled into view. CSS3 effects are used to fade and zoom the image:</p>
 
-    <a href="https://ucarecdn.com/718f79c5-2868-41c8-b56e-c87237674adb/-/resize/500x/man.jpg" class="full progressive replace">
-      <img src="https://ucarecdn.com/718f79c5-2868-41c8-b56e-c87237674adb/-/resize/32x/man.jpg" class="preview" loading="lazy" width="32" height="18" alt="man" />
+    <a href="https://res.cloudinary.com/oworks/image/upload/f_auto/v1593771256/pimage/squirrel" class="full progressive replace">
+      <img src="https://res.cloudinary.com/oworks/image/upload/f_auto,c_scale,w_20/v1593771256/pimage/squirrel" class="preview" loading="lazy" width="20" height="15" alt="squirrel" />
     </a>
 
     <p>After replacement, link-clicking is disabled and the HTML becomes:</p>
@@ -87,26 +116,31 @@
 
     <p>If JavaScript or image loading fails, a blurred version of the preview image can be clicked to view the full image:</p>
 
-    <a href="https://ucarecdn.com/718f79c5-2868-41c8-b56e-c87237674adb/-/resize/500x/man.jpg" class="full progressive">
-      <img src="https://ucarecdn.com/718f79c5-2868-41c8-b56e-c87237674adb/-/resize/32x/man.jpg" class="preview" loading="lazy" width="32" height="18" alt="man" />
+    <a href="https://res.cloudinary.com/oworks/image/upload/f_auto/v1593771256/pimage/squirrel" class="full progressive">
+      <img src="https://res.cloudinary.com/oworks/image/upload/f_auto,c_scale,w_20/v1593771256/pimage/squirrel" class="preview" loading="lazy" width="20" height="15" alt="squirrel" />
     </a>
 
+    <p class="top"><a href="#contents">back to contents&hellip;</a></p>
 
-    <h2>Native lazy-loading</h2>
 
-    <p>To maximize performance, add <code>width</code>, <code>height</code>, and <code>loading="lazy"</code> attributes to the preview image:</p>
+    <h2 id="native">Native lazy-loading</h2>
+
+    <p>To improve performance, add <code>width</code>, <code>height</code>, and <code>loading="lazy"</code> attributes to the <strong>preview image</strong>:</p>
 
     <pre><code>&lt;img src=&quot;tiny.jpg&quot; class=&quot;preview&quot;
   width=&quot;20&quot; height=&quot;15&quot;
   loading=&quot;lazy&quot;
-  alt=&quot;image&quot; /&gt;</code></pre>
+  alt=&quot;image&quot;
+/&gt;</code></pre>
 
-    <p>Modern browsers will set the correct aspect ratio before loading the preview shortly before it is scrolled into view.</p>
+    <p>Modern browsers will set the correct aspect ratio and load the preview image shortly before it is scrolled into view.</p>
+
+    <p class="top"><a href="#contents">back to contents&hellip;</a></p>
 
 
-    <h2>Retain the link</h2>
+    <h2 id="link">Retain the link</h2>
 
-    <p>If you require a responsive image to remain a real link, use the <code>href</code> for the link address and add a <code>data-href</code> attribute with the large image URL:</p>
+    <p>If you require a responsive image to remain a real link, set the <code>href</code> to the link address and add a <code>data-href</code> attribute with the large image URL:</p>
 
     <pre><code>&lt;a href=&quot;http://site.com/&quot;
    data-href=&quot;full.jpg&quot;
@@ -114,10 +148,12 @@
      &lt;img src=&quot;tiny.jpg&quot; class=&quot;preview&quot; alt=&quot;image&quot; /&gt;
 &lt;/a&gt;</code></pre>
 
-    <p>Note that users will not be able to view the full image if downloading or JavaScript fails.</p>
+    <p><em>Users will not be able to view the full image if downloading or JavaScript fails.</em></p>
+
+    <p class="top"><a href="#contents">back to contents&hellip;</a></p>
 
 
-    <h2>Alternative container elements</h2>
+    <h2 id="container">Alternative container elements</h2>
 
     <p>If necessary, most HTML container elements can be used with a <code>data-href</code> attribute rather than a link, e.g.</p>
 
@@ -125,18 +161,24 @@
   &lt;img src=&quot;tiny.jpg&quot; class=&quot;preview&quot; alt=&quot;image&quot; /&gt;
 &lt;/figure&gt;</code></pre>
 
-    <p>Note that users will not be able to view the full image if downloading or JavaScript fails.</p>
+    <p>Exceptions include <code>&lt;picture&gt;</code>, <code>&lt;video&gt;</code>, <code>&lt;audio&gt;</code>, and <code>&lt;iframe&gt;</code>. These are inappropriate and may cause unexpected browser behavior.</p>
+
+    <p><em>Users will not be able to view the full image if downloading or JavaScript fails.</em></p>
+
+    <p class="top"><a href="#contents">back to contents&hellip;</a></p>
 
 
-    <h2>Responsive images</h2>
+    <h2 id="responsive">Responsive images</h2>
 
-    <p><a href="https://www.sitepoint.com/how-to-build-responsive-images-with-srcset/">Responsive images</a> of differing sizes and resolutions can be defined in the container link/element using <code>data-srcset</code> and <code>data-sizes</code> attributes which map to the standard <code>srcset</code> and <code>sizes</code> attributes, e.g.</p>
+    <p><a href="https://www.sitepoint.com/how-to-build-responsive-images-with-srcset/">Responsive images</a> of differing sizes can be defined in the container link/element using <code>data-srcset</code> and <code>data-sizes</code> attributes. These correspond to the standard <code>srcset</code> and <code>sizes</code> attributes, e.g.</p>
 
     <pre><code>&lt;a href=&quot;small.jpg&quot;
    data-srcset=&quot;small.jpg 800w, large.jpg 1200w&quot;
    data-sizes=&quot;100vw&quot;
    class=&quot;progressive replace&quot;&gt;
+
      &lt;img src=&quot;preview.jpg&quot; class=&quot;preview&quot; alt=&quot;image&quot; /&gt;
+
 &lt;/a&gt;</code></pre>
 
     <p><em>(carriage returns added to aid legibility)</em></p>
@@ -150,9 +192,33 @@
 
     <p>Modern browsers will load large.jpg when the viewport width is 800px or greater.</p>
 
-    <h2>CSS background images</h2>
+    <p class="top"><a href="#contents">back to contents&hellip;</a></p>
 
-    <p><code>progressive-image.js</code> can replace CSS backgrounds.</p>
+
+    <h2 id="reveal">Custom reveal effects</h2>
+
+    <p>A class of <code>reveal</code> is applied to the full image when it is placed on the page. This starts a 1 second CSS3 animation named <code>progressiveReveal</code>:</p>
+
+    <pre><code>.progressive img.reveal {
+  animation: progressiveReveal 1s linear;
+}
+
+@keyframes progressiveReveal {
+  0% { transform: scale(1.05); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}</code></pre>
+
+    <p>This code can be changed or overridden with alternative animations, perhaps by applying another class to the container element.</p>
+
+
+    <p class="top"><a href="#contents">back to contents&hellip;</a></p>
+
+
+    <h2 id="background">CSS background images</h2>
+
+    <p><code>progressive-image.js</code> can lazy-load CSS background images.</p>
+
+    <p>However, it is not best-suited to that task and CSS3 animations cannot be applied. You will get better results using a real <code>&lt;img&gt;</code> rendered below other content and maximized with <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit"><code>object-fit: cover</code></a>.</p>
 
     <div class="full bgimg progressive replace">CSS background image</div>
 
@@ -160,7 +226,7 @@
 
     <pre><code>&lt;div class=&quot;bgimg progressive replace&quot;&gt;content&lt;/div&gt;</code></pre>
 
-    <p>Any CSS selector can be used - a <code>bgimg</code> class has been added in this example. Set the full-size image in your CSS as normal, e.g.</p>
+    <p>Any CSS selector can be used &ndash; a <code>bgimg</code> class has been added here. Set the full-size image in your CSS as normal, e.g.</p>
 
     <pre><code>.bgimg {
   background: url(large.jpg) 50% 50% no-repeat;
@@ -173,31 +239,36 @@
   background-img: url(tiny.jpg);
 }</code></pre>
 
-    <p><code>tiny.jpg</code> is replaced with <code>large.jpg</code> as soon as the element appears in the viewport. Media queries can be used to load images of appropriate sizes.</p>
+    <p><code>tiny.jpg</code> is replaced with <code>large.jpg</code> as soon as the element appears in the viewport. If necessary, media queries can be used to load appropriately-sized images.</p>
 
-    <p>CSS3 animation effects cannot be applied to background images. If effects are required, use a real image, set <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit">CSS <code>object-fit: cover</code></a>, and ensure it is rendered below other content in the container.</p>
+    <p class="top"><a href="#contents">back to contents&hellip;</a></p>
 
 
-    <h2>Usage notes</h2>
+    <h2 id="notes">Usage notes</h2>
+
+    <p>Thanks for trying <a href="https://github.com/craigbuckler/progressive-image.js/"><code>progressive-image.js</code></a> and please <a href="https://github.com/craigbuckler/progressive-image.js/issues/">report any issues</a> you encounter.</p>
 
     <ol>
-      <li>Do not use inappropriate container elements such as <code>&lt;picture&gt;</code>, <code>&lt;video&gt;</code>, <code>&lt;audio&gt;</code>, <code>&lt;iframe&gt;</code> etc.</li>
+      <li>The code works in all browsers from IE10 and above. IE10/11 will not smoothly blur the preview image. Older browsers fallback to click-to-view.</li>
 
-      <li><code>progressive-image.js</code> works in all browsers from IE10 and above. IE10/11 will not smoothly blur the preview image. Older browsers fallback to click-to-view.</li>
+      <li>The code cannot be used for <a href="https://developer.mozilla.org/Web/HTML/Element/picture">art direction</a> where different images with different aspect ratios are requested according to the dimensions and/or orientation of a device using <code>&lt;picture&gt;</code> and <code>&lt;source&gt;</code> elements.</li>
 
-      <li>Only vertical scrolling is checked. All images in the horizontal plane will be loaded, so it may not be suitable for carousels.</li>
+      <li>Only vertical scrolling is checked. All images in the horizontal plane will be loaded &ndash; it may not be suitable for carousels.</li>
 
       <li>Progressive images dynamically added to the page using JavaScript are handled if a navigation event occurs or the browser supports <code>MutationObserver</code>.</li>
 
-      <li>Actual or perceived performance may be improved using an SVG preview image, <a href="https://css-tricks.com/data-uris/">inlined data URIs</a>, or <a href="http://daverupert.com/2015/12/intrinsic-placeholders-with-picture/">intrinsic placeholders</a>.</li>
+      <li>Actual or perceived performance may be improved using an SVG preview image or <a href="https://css-tricks.com/data-uris/">inlined data URIs</a>.</li>
     </ol>
+
+    <p class="top"><a href="#contents">back to contents&hellip;</a></p>
+
 
     <h2>Image credit</h2>
 
-    <p>Images in this demonstration have been sourced from <a href="https://unsplash.com/">unsplash.com</a> and are credited to Alex Blăjan, Philippe Toupet, James Padolsey, Ashim D'Silva, and Levi Guzman.</p>
+    <p>Images in this demonstration have been sourced from <a href="https://unsplash.com/">unsplash.com</a> and are credited to Matt Palmer, Joshua Gaunt, Viktor Jakovlev, Caleb Martin, &amp; Red Zepplin.</p>
 
-    <a href="https://ucarecdn.com/0ece37a9-3e7e-4692-9f95-d8dd0401345b/bridge.jpg" data-srcset="https://ucarecdn.com/0ece37a9-3e7e-4692-9f95-d8dd0401345b/-/resize/400x/bridge.jpg 400w, https://ucarecdn.com/0ece37a9-3e7e-4692-9f95-d8dd0401345b/-/resize/800x/bridge.jpg 800w, https://ucarecdn.com/0ece37a9-3e7e-4692-9f95-d8dd0401345b/bridge.jpg 1600w" class="primary progressive replace">
-      <img src="https://ucarecdn.com/0ece37a9-3e7e-4692-9f95-d8dd0401345b/-/resize/32x/-/grayscale/-/quality/lightest/bridge.jpg" class="preview" loading="lazy" width="32" height="8" alt="bridge" />
+    <a href="https://res.cloudinary.com/oworks/image/upload/f_auto/v1593773543/pimage/exmouth" data-srcset="https://res.cloudinary.com/oworks/image/upload/f_auto,c_scale,w_400/v1593773543/pimage/exmouth 400w, https://res.cloudinary.com/oworks/image/upload/f_auto,c_scale,w_800/v1593773543/pimage/exmouth 800w, https://res.cloudinary.com/oworks/image/upload/f_auto/v1593773543/pimage/exmouth 1600w" class="primary progressive replace">
+      <img src="https://res.cloudinary.com/oworks/image/upload/f_auto,c_scale,w_32/v1593773543/pimage/exmouth" class="preview" loading="lazy" width="32" height="8" alt="Exmouth" />
     </a>
 
   </article>

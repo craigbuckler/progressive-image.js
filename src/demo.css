@@ -6,9 +6,14 @@
   margin: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-  font-size: 100%;
+  font-size: 120%;
+  line-height: 1.4;
   color: #444;
   background-color: #fff;
   overflow-x: hidden;
@@ -16,14 +21,18 @@ body {
 }
 
 article {
-  max-width: 40em;
+  max-width: 42em;
   padding: 0 4em;
   margin: 0 auto;
 }
 
 h1, h2 {
+  margin-top: 1rem;
   font-weight: normal;
-  margin-top: 1em;
+}
+
+h2 {
+  margin: 2em 0 0.2em;
 }
 
 p, a {
@@ -39,14 +48,15 @@ ul, ol {
 }
 
 li {
-  margin-top: 0.5em;
+  margin-top: 0.8em;
 }
 
 pre {
   white-space: pre;
   padding: 2px 6px;
-  margin-top: 1em;
-  background-color: #ddd;
+  margin-top: 1.5em;
+  background-color: #eee;
+  border: 1px solid #999;
   border-radius: 3px;
   overflow: auto;
 }
@@ -54,16 +64,31 @@ pre {
 code {
   font-family: monospace;
   font-size: 1em;
+  padding: 3px;
+  border-radius: 3px;
+  background-color: #eee;
+}
+
+pre code {
+  padding: 0;
+  border-radius: 0;
+  background-color: inherit;
 }
 
 img {
   max-width: 100%;
 }
 
+.top {
+  font-size: 0.85em;
+  text-align: right;
+  font-style: italic;
+}
+
 .bgimg {
-  background: url(https://ucarecdn.com/718f79c5-2868-41c8-b56e-c87237674adb/-/resize/500x/man.jpg) 50% 50% no-repeat;
+  background: url(https://res.cloudinary.com/oworks/image/upload/f_auto/v1593771256/pimage/squirrel) 50% 50% no-repeat;
   background-size: cover;
-  height: 300px;
+  height: 400px;
   margin-top: 0.5em;
   font-size: 2em;
   text-align: center;
@@ -72,7 +97,7 @@ img {
 }
 
 .bgimg.replace {
-  background-image: url(https://ucarecdn.com/718f79c5-2868-41c8-b56e-c87237674adb/-/resize/32x/man.jpg);
+  background-image: url(https://res.cloudinary.com/oworks/image/upload/f_auto,c_scale,w_20/v1593771256/pimage/squirrel);
 }
 
 .primary {
