@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width">
 <link rel="stylesheet" href="src/demo.css">
 <link rel="stylesheet" href="src/css/progressive-image.css">
+<script src="src/js/progressive-image.js" async></script>
 </head>
 <body>
 
@@ -52,7 +53,7 @@
       <li>supports <a href="#responsive">responsive images</a> (<code>srcset</code> and <code>sizes</code> attributes)</li>
       <li>supports <a href="#background">CSS background images</a></li>
       <li>supports <a href="#native">native lazy loading and aspect ratios</a></li>
-      <li>lightweight: 1,358 bytes of JavaScript, 407 bytes of CSS (minified)</li>
+      <li>lightweight: 1,407 bytes of JavaScript, 407 bytes of optional CSS (minified)</li>
       <li>any <a href="#reveal">CSS reveal effect</a> can be applied</li>
       <li>no external dependencies &ndash; works with any framework</li>
       <li>makes up to three attempts if images fail to download</li>
@@ -76,10 +77,10 @@
 
     <h2 id="basic">Basic example</h2>
 
-    <p>The page must load the CSS and JavaScript. It can be placed anywhere on the page but, typically, the CSS is loaded in the <code>&lt;head&gt;</code> and the JS is loaded just before the closing <code>&lt;/body&gt;</code> tag:</p>
+    <p>The page must load the CSS and JavaScript. It can be placed anywhere on the page but as early as possible in <code>&lt;head&gt;</code> is ideal:</p>
 
     <pre><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/progressive-image.js/dist/progressive-image.css&quot;&gt;
-&lt;script src=&quot;https://cdn.jsdelivr.net/npm/progressive-image.js/dist/progressive-image.js&quot;&gt;&lt;/script&gt;</code></pre>
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/progressive-image.js/dist/progressive-image.js&quot; defer&gt;&lt;/script&gt;</code></pre>
 
     <p>CDN URLs are shown above but you can also use <a href="https://www.npmjs.com/package/progressive-image.js"><code>npm</code></a> and a bundler:</p>
 
@@ -274,7 +275,5 @@
   </article>
 
 </main>
-
-<script src="src/js/progressive-image.js"></script>
 </body>
 </html>

@@ -114,6 +114,8 @@ if (window.addEventListener) window.addEventListener('load', function() {
       imgClass.remove(classPreview);
       imgClass.add(classReveal);
       img.alt = pImg.alt || '';
+      img.onload = 0;
+      img.onerror = 0;
 
       rAF(function() {
 
