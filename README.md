@@ -15,7 +15,7 @@ Benefits:
 * supports responsive images (`srcset` and `sizes` attributes)
 * supports CSS background images
 * supports native lazy loading and aspect ratios
-* lightweight: 1,358 bytes of JavaScript, 407 bytes of CSS (minified)
+* lightweight: 1,407 bytes of JavaScript, 407 bytes of optional CSS (minified)
 * any CSS reveal effect can be applied
 * no external dependencies - works with any framework
 * makes up to three attempts if images fail to download
@@ -32,7 +32,7 @@ Include the minified CSS and JavaScript anywhere in your page:
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/progressive-image.js/dist/progressive-image.css">
-<script src="https://cdn.jsdelivr.net/npm/progressive-image.js/dist/progressive-image.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/progressive-image.js/dist/progressive-image.js" async></script>
 ```
 
 or use [npm](https://www.npmjs.com/package/progressive-image.js) and a bundler:
@@ -60,6 +60,10 @@ Refer to `demo.html` for full documentation, examples, options, and usage notes.
 
 
 ## Version history
+
+### v1.6.1, 2 October 2021
+
+* fixed page resize removing responsive `srcset` images
 
 ### v1.6.0, 3 July 2020
 
